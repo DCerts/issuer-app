@@ -9,11 +9,8 @@ const Auth = {
     },
     authenticate: async (signature: string, publicAddress: string) => {
         return Base.post<string>(
-            `/auth`,
-            {
-                address: publicAddress,
-                signature: signature
-            }
+            `/auth/${publicAddress}`,
+            signature
         );
     }
 };

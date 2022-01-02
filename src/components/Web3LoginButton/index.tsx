@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Web3 from 'web3';
 import Auth from '../../apis/Auth';
+import { JWT_KEY } from '../../common/AuthConstants';
 
 
 declare global {
@@ -14,26 +15,18 @@ const Web3LoginButton = (props: any) => {
     let web3: Web3 | undefined;
     let navigate = useNavigate();
 
-    const signMessage = async (message: string, publicAddress: string) => {
-        return web3?.eth.personal.sign(
-            message,
-            publicAddress,
-            '' // the password will be ignored
-        );
-    };
-
     const handleClick = async () => {
         if (window.ethereum) {
             web3 = new Web3(window.ethereum);
             await window.ethereum.enable();
 
             const publicAddress = await web3.eth.getCoinbase();
-            console.log(publicAddress);
 
-            const nonce = await Auth.fetchNonce(publicAddress);
-            const signature = await signMessage(
-                nonce?.data,
-                publicAddress
+            const nonce = (await Auth.fetchNonce(publicAddress)).data;
+            const signature = await web3.eth.personal.sign(
+                nonce,
+                publicAddress,
+                '', // the password will be ignored
             );
 
             if (signature) {
@@ -41,8 +34,8 @@ const Web3LoginButton = (props: any) => {
                     signature,
                     publicAddress
                 );
-                // TODO: Save JWT for future requests
-                localStorage.setItem('jwt', JSON.stringify(jwt)); // but don't do that!
+                // Save JWT for future requests
+                localStorage.setItem(JWT_KEY, JSON.stringify(jwt.data));
                 navigate('/dashboard');
             }
         }
