@@ -1,4 +1,4 @@
-This is a part of my little project [Distributed Certificates Manager (DCM)](https://github.com/users/Tuanm/projects/3).
+This is a part of our little project **Distributed Certificates Manager (DCM)** from [DCerts](https://github.com/DCerts).
 
 ### Usage
 Install all dependencies with `Node Package Manager`:
