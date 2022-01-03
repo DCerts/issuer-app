@@ -1,5 +1,7 @@
-import React from 'react';
-import { useRoutes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useRoutes, useNavigate } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorComponent from './components/ErrorComponent';
 import Home from './screens/Home';
 import Dashboard from './screens/Dashboard';
 
@@ -17,7 +19,13 @@ const App = () => {
 
     const routes = useRoutes([homeRoutes, dashboardRoutes]);
 
-    return (<>{routes}</>);
+    return (
+        <ErrorBoundary
+            FallbackComponent={ErrorComponent}
+        >
+            <>{routes}</>
+        </ErrorBoundary>
+    );
 };
 
 export default App;

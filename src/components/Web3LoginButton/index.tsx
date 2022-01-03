@@ -13,7 +13,7 @@ declare global {
 
 const Web3LoginButton = (props: any) => {
     let web3: Web3 | undefined;
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleClick = async () => {
         if (window.ethereum) {
@@ -35,7 +35,7 @@ const Web3LoginButton = (props: any) => {
                     publicAddress
                 );
                 // Save JWT for future requests
-                localStorage.setItem(JWT_KEY, JSON.stringify(jwt.data));
+                localStorage.setItem(JWT_KEY, jwt.data);
                 navigate('/dashboard');
             }
         }
