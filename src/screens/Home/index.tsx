@@ -16,7 +16,7 @@ const Home = () => {
         };
 
         fetchAccount();
-    });
+    }, []);
 
     return (
         <>

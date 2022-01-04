@@ -5,6 +5,7 @@ import Account, { Issuer } from '../../apis/Account'
 
 const Dashboard = () => {
     const [account, setAccount] = useState<Issuer>();
+    const [loaded, setLoaded] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -12,18 +13,19 @@ const Dashboard = () => {
             try {
                 const issuer = (await Account.get()).data;
                 setAccount(issuer);
+                setLoaded(true);
             } catch {
                 navigate('/');
             }
         };
 
         fetchAccount();
-    });
+    }, [loaded]);
 
     return (
         <>
             {
-                account && (
+                loaded && account && (
                     <h1>Hello {account.id}!</h1>
                 )
             }
