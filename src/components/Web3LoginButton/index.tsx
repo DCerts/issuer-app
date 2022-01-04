@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Web3 from 'web3';
 import Auth from '../../apis/Auth';
 import { JWT_KEY } from '../../common/AuthConstants';
@@ -11,9 +10,14 @@ declare global {
     }
 }
 
-const Web3LoginButton = (props: any) => {
+interface Web3LoginButtonProps {
+    setAuthenticated: (authenticated: boolean) => void;
+    title: string;
+}
+
+const Web3LoginButton = (props: Web3LoginButtonProps) => {
     let web3: Web3 | undefined;
-    const navigate = useNavigate();
+    const setAuthenticated = props.setAuthenticated;
 
     const handleClick = async () => {
         if (window.ethereum) {
@@ -36,7 +40,7 @@ const Web3LoginButton = (props: any) => {
                 );
                 // Save JWT for future requests
                 localStorage.setItem(JWT_KEY, jwt.data);
-                navigate('/dashboard');
+                setAuthenticated(true);
             }
         }
     };

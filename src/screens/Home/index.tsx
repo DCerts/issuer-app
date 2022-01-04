@@ -1,27 +1,19 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import Web3LoginButton from '../../components/Web3LoginButton';
-import Account from '../../apis/Account';
 
 
-const Home = () => {
-    const navigate = useNavigate();
+interface HomeProps {
+    setAuthenticated: (authenticated: boolean) => void;
+}
 
-    useEffect(() => {
-        const fetchAccount = async () => {
-            try {
-                await Account.get();
-                navigate('/dashboard');
-            } catch {}
-        };
-
-        fetchAccount();
-    });
-
+const Home = (props: HomeProps) => {
     return (
         <>
             <h1>Sign in with</h1>
-            <Web3LoginButton title={'MetaMask'} />
+            <Web3LoginButton
+                setAuthenticated={props.setAuthenticated}
+                title={'MetaMask'}
+            />
         </>
     );
 };

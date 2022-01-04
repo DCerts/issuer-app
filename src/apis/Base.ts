@@ -15,11 +15,13 @@ class API {
     }
 
     static auth() {
+        const token = localStorage.getItem(JWT_KEY);
+        if (!token) return API.noAuth();
         return axios.create({
             baseURL: API.BASE_URL,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem(JWT_KEY)}`
+                'Authorization': `Bearer ${token}`
             }
         });
     }
