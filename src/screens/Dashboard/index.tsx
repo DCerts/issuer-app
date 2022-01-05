@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import MainFeatureIcon from '../../components/MainFeatureIcon';
 import Account, { Issuer } from '../../apis/Account'
 
 
@@ -24,11 +25,26 @@ const Dashboard = () => {
 
     return (
         <>
-            {
-                loaded && account && (
-                    <h1>Hello {account.name}!</h1>
-                )
-            }
+            <MainFeatureIcon
+                icon={'https://cdn-icons-png.flaticon.com/512/3472/3472620.png'}
+                title={'Issue Certificate'}
+                description={[
+                    'Create and manage your own digital assets',
+                    'Create and manage your own digital assets',
+                    'Create and manage your own digital assets'
+                ]}
+                to={'/issuer/create'}
+            />
+            <MainFeatureIcon
+                icon={'https://cdn-icons.flaticon.com/png/512/5077/premium/5077581.png?token=exp=1641368069~hmac=931ebb2c704da26cbf0568a10a0e97fe'}
+                title={'Add Group'}
+                description={[
+                    'Create and manage your own digital assets',
+                    'Create and manage your own digital assets',
+                    'Create and manage your own digital assets'
+                ]}
+                to={'/issuer/group/create'}
+            />
         </>
     );
 };

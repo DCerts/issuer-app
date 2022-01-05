@@ -15,12 +15,12 @@ const MainFeatureIcon = (props: MainFeatureIconProps) => {
     return (
         <div onClick={() => navigate(props.to)}>
             <img src={props.icon} />
-            <>{props.title}</>
-            <>
-                {props.description.map((item, index) => {
-                    <>{item}</>
-                })}
-            </>
+            <div>{props.title}</div>
+            <div>
+                {props.description.map((item, index) => (
+                    <div key={index}>{item}</div>
+                ))}
+            </div>
         </div>
     )
 };
