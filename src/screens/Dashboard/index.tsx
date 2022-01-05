@@ -26,7 +26,7 @@ const Dashboard = () => {
         <>
             {
                 loaded && account && (
-                    <h1>Hello {account.id}!</h1>
+                    <h1>Hello {account.name}!</h1>
                 )
             }
         </>
