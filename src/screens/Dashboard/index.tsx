@@ -14,9 +14,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div>
-                <GoBackIcon to={'/'} />
-            </div>
+            <GoBackIcon to={'/'} text={'Home'} />
             <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
             {
                 loaded && (
@@ -31,7 +29,7 @@ const Dashboard = () => {
                                         'Create and manage your own digital assets',
                                         'Create and manage your own digital assets'
                                     ]}
-                                    to={'/group/create'}
+                                    to={'/group/new'}
                                 />
                             )
                         }

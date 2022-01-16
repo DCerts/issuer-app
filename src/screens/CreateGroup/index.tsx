@@ -6,6 +6,7 @@ import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
 import WalletAPI from '../../web3/WalletAPI';
 import { Role } from '../../common/models';
+import GoBackIcon from '../../components/GoBackIcon';
 
 
 const CreateGroup = () => {
@@ -42,6 +43,7 @@ const CreateGroup = () => {
 
     return (
         <>
+            <GoBackIcon to={'/dashboard'} text={'Back'} />
             <AuthFilter
                 setLoaded={setLoaded}
                 role={Role.SCHOOL}

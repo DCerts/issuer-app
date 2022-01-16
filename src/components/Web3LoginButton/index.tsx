@@ -14,17 +14,19 @@ const Web3LoginButton = (props: Web3LoginButtonProps) => {
         const address = await Core.getAddress();
         if (address) {
             const nonce = (await Auth.fetchNonce(address)).data;
-            const signature = await Core.sign(nonce, address);
+            try {
+                const signature = await Core.sign(nonce, address);
 
-            if (signature) {
-                const jwt = await Auth.authenticate(
-                    signature,
-                    address
-                );
-                // Save JWT for future requests
-                localStorage.setItem(JWT_KEY, jwt.data);
-                if (props.onSuccess) props.onSuccess();
-            }
+                if (signature) {
+                    const jwt = await Auth.authenticate(
+                        signature,
+                        address
+                    );
+                    // Save JWT for future requests
+                    localStorage.setItem(JWT_KEY, jwt.data);
+                    if (props.onSuccess) props.onSuccess();
+                }
+            } catch {}
         }
     };
 

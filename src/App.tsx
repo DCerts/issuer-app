@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useRoutes, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorComponent from './components/ErrorComponent';
 import Home from './screens/Home';
@@ -19,7 +19,7 @@ const App = () => {
     };
 
     const createGroupRoutes = {
-        path: '/group/create',
+        path: '/group/new',
         element: <CreateGroup />
     };
 

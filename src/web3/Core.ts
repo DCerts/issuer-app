@@ -23,6 +23,9 @@ class Core {
             this.web3 = new Web3(window.ethereum);
             await window.ethereum.enable();
         }
+        else {
+            console.error('No web3? You should consider trying MetaMask!');
+        }
     }
 
     async sign(message: string, address: string) {
@@ -30,7 +33,7 @@ class Core {
             return this.web3.eth.personal.sign(
                 message,
                 address,
-                '' // the password will be ignored
+                '' // the password will be ignored by MetaMask
             );
         }
     }

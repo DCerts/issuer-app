@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 interface GoBackIconProps {
+    text: string,
     to: string
 }
 
@@ -10,8 +11,9 @@ const GoBackButton = (props: GoBackIconProps) => {
     const navigate = useNavigate();
 
     return (
-        <i className='fa-solid fa-arrow-left'
-            onClick={() => navigate(props.to)}></i>
+        <button onClick={() => navigate(props.to)}>
+            {props.text}
+        </button>
     );
 };
 
