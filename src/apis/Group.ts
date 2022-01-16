@@ -10,6 +10,9 @@ const GroupAPI = {
     },
     getGroup: async (id: number) => {
         return Base.auth().get<Group>(`/groups/${id}`);
+    },
+    confirmGroup: async (id: number) => {
+        return Base.auth().put(`/groups/${id}`);
     }
 };
 

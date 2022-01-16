@@ -28,6 +28,16 @@ class WalletAPI {
             return groupId;
         }
     }
+
+    async confirmGroup(groupId: number) {
+        if (this.contract) {
+            const address = await Core.getAddress();
+            await this.contract.methods.confirmGroup(groupId).send({
+                from: address,
+                gas: 1000000
+            });
+        }
+    }
 }
 
 export default new WalletAPI();

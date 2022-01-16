@@ -14,6 +14,7 @@ const CreateGroup = () => {
     const [groupName, setGroupName] = useState<string>('');
     const [groupThreshold, setGroupThreshold] = useState<number>(0);
     const [groupMembers, setGroupMembers] = useState<string[]>([]);
+    const backUrl = '/dashboard';
 
     const createGroup = async () => {
         try {
@@ -43,11 +44,11 @@ const CreateGroup = () => {
 
     return (
         <>
-            <GoBackIcon to={'/dashboard'} text={'Back'} />
+            <GoBackIcon to={backUrl} text={'Back'} />
             <AuthFilter
                 setLoaded={setLoaded}
                 role={Role.SCHOOL}
-                fallbackUrl={'/dashboard'}
+                fallbackUrl={backUrl}
             />
             {
                 loaded && (
@@ -63,7 +64,7 @@ const CreateGroup = () => {
                             }}
                         />
                         <SubmitButton
-                            title='Create'
+                            title={'Create'}
                             onClick={createGroup}
                         />
                     </>

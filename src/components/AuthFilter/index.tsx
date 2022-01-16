@@ -34,10 +34,10 @@ const AuthFilter = (props: AuthFilterProps) => {
                 setAuthorizing(false);
             } catch (err) {
                 props.setLoaded(false);
-                if (axios.isAxiosError(err)) {
+                if (axios.isAxiosError(err)) { // Unauthorized
                     navigate(homeUrl);
                 }
-                else {
+                else { // Role mismatch
                     navigate(props.fallbackUrl || homeUrl);
                 }
             }

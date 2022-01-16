@@ -11,13 +11,17 @@ const Home = () => {
 
     return (
         <>
-            <AuthFilter setLoaded={setSuccess} successUrl={successUrl} />
+            {
+                success && (
+                    <AuthFilter setLoaded={setSuccess} successUrl={successUrl} />
+                )
+            }
             {
                 !success && (
                     <>
-                        <h2>Sign in with</h2>
+                        <h2>{'Sign in with'}</h2>
                         <Web3LoginButton
-                            title='MetaMask'
+                            title={'MetaMask'}
                             onSuccess={() => navigate(successUrl)}
                             onFailure={console.log}
                         />

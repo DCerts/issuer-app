@@ -6,6 +6,11 @@ const AccountAPI = {
         return Base.auth().get<Account>(
             `/accounts`
         );
+    },
+    getAll: async () => {
+        return Base.auth().get<Account[]>(
+            `/accounts/all`
+        );
     }
 };
 
