@@ -4,6 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorComponent from './components/ErrorComponent';
 import Home from './screens/Home';
 import Dashboard from './screens/Dashboard';
+import CreateGroup from './screens/CreateGroup';
 
 
 const App = () => {
@@ -17,7 +18,16 @@ const App = () => {
         element: <Dashboard />
     };
 
-    const routes = useRoutes([homeRoutes, dashboardRoutes]);
+    const createGroupRoutes = {
+        path: '/group/create',
+        element: <CreateGroup />
+    };
+
+    const routes = useRoutes([
+        homeRoutes,
+        dashboardRoutes,
+        createGroupRoutes
+    ]);
 
     return (
         <ErrorBoundary

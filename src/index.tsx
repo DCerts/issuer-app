@@ -5,6 +5,14 @@ import App from './App';
 import dotenv from 'dotenv';
 
 
+declare global {
+    interface Window {
+        ethereum: any;
+        contract: any;
+    }
+}
+
+
 dotenv.config();
 
 ReactDOM.render(

@@ -1,23 +1,12 @@
 import Base from './Base';
+import { Account } from '../common/models';
 
-
-interface Issuer {
-    id: string,
-    name: string,
-    email: string,
-    school: string,
-    groups: Array<string>
-}
-
-const Account = {
+const AccountAPI = {
     get: async () => {
-        return Base.auth().get<Issuer>(
-            `/issuer`
+        return Base.auth().get<Account>(
+            `/account`
         );
     }
 };
 
-export default Account;
-export type {
-    Issuer
-};
+export default AccountAPI;

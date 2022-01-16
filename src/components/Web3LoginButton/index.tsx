@@ -1,42 +1,29 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Web3 from 'web3';
 import Auth from '../../apis/Auth';
 import { JWT_KEY } from '../../common/AuthConstants';
+import Core from '../../web3/Core';
 
 
-declare global {
-    interface Window {
-        ethereum: any;
-    }
+interface Web3LoginButtonProps {
+    title?: string;
+    onSuccess?: () => void;
 }
 
-const Web3LoginButton = (props: any) => {
-    let web3: Web3 | undefined;
-    const navigate = useNavigate();
-
+const Web3LoginButton = (props: Web3LoginButtonProps) => {
     const handleClick = async () => {
-        if (window.ethereum) {
-            web3 = new Web3(window.ethereum);
-            await window.ethereum.enable();
-
-            const publicAddress = await web3.eth.getCoinbase();
-
-            const nonce = (await Auth.fetchNonce(publicAddress)).data;
-            const signature = await web3.eth.personal.sign(
-                nonce,
-                publicAddress,
-                '', // the password will be ignored
-            );
+        const address = await Core.getAddress();
+        if (address) {
+            const nonce = (await Auth.fetchNonce(address)).data;
+            const signature = await Core.sign(nonce, address);
 
             if (signature) {
                 const jwt = await Auth.authenticate(
                     signature,
-                    publicAddress
+                    address
                 );
                 // Save JWT for future requests
                 localStorage.setItem(JWT_KEY, jwt.data);
-                navigate('/dashboard');
+                if (props.onSuccess) props.onSuccess();
             }
         }
     };

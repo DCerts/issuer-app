@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 interface MainFeatureIconProps {
     icon: string,
     title: string,
-    description: Array<string>,
+    descriptions: Array<string>,
     to: string
 }
 
@@ -17,7 +17,7 @@ const MainFeatureIcon = (props: MainFeatureIconProps) => {
             <img src={props.icon} />
             <div>{props.title}</div>
             <div>
-                {props.description.map((item, index) => (
+                {props.descriptions.map((item, index) => (
                     <div key={index}>{item}</div>
                 ))}
             </div>

@@ -1,7 +1,7 @@
 import Base from './Base';
 
 
-const Auth = {
+const AuthAPI = {
     fetchNonce: async (publicAddress: string) => {
         return Base.noAuth().get<string>(
             `/auth/${publicAddress}/nonce`
@@ -17,4 +17,4 @@ const Auth = {
     }
 };
 
-export default Auth;
+export default AuthAPI;
