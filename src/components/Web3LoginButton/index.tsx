@@ -7,6 +7,7 @@ import Core from '../../web3/Core';
 interface Web3LoginButtonProps {
     title?: string;
     onSuccess?: () => void;
+    onFailure?: (err: any) => void;
 }
 
 const Web3LoginButton = (props: Web3LoginButtonProps) => {
@@ -26,7 +27,9 @@ const Web3LoginButton = (props: Web3LoginButtonProps) => {
                     localStorage.setItem(JWT_KEY, jwt.data);
                     if (props.onSuccess) props.onSuccess();
                 }
-            } catch {}
+            } catch (err) {
+                if (props.onFailure) props.onFailure(err);
+            }
         }
     };
 

@@ -1,9 +1,14 @@
+import dotenv from 'dotenv';
 import axios from 'axios';
 import { JWT_KEY } from '../common/AuthConstants';
 
 
+dotenv.config();
+
+const BASE_API_URL = process.env.BASE_API_URL || 'http://localhost:8080';
+
 class API {
-    static BASE_URL: string = 'http://localhost:8080';
+    static BASE_URL: string = BASE_API_URL;
 
     static noAuth() {
         return axios.create({

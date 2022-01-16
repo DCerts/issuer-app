@@ -11,9 +11,11 @@ const GoBackButton = (props: GoBackIconProps) => {
     const navigate = useNavigate();
 
     return (
-        <button onClick={() => navigate(props.to)}>
-            {props.text}
-        </button>
+        <div>
+            <button onClick={() => navigate(props.to)}>
+                {props.text}
+            </button>
+        </div>
     );
 };
 

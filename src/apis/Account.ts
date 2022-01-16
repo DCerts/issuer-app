@@ -4,7 +4,7 @@ import { Account } from '../common/models';
 const AccountAPI = {
     get: async () => {
         return Base.auth().get<Account>(
-            `/account`
+            `/accounts`
         );
     }
 };

@@ -19,6 +19,7 @@ const Home = () => {
                         <Web3LoginButton
                             title='MetaMask'
                             onSuccess={() => navigate(successUrl)}
+                            onFailure={console.log}
                         />
                     </>
                 )

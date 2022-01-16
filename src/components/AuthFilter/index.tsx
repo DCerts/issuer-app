@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AccountAPI from '../../apis/Account';
 import { Account, Role } from '../../common/models';
 import WalletAPI from '../../web3/WalletAPI';
+import LoadingComponent from '../LoadingComponent';
 
 
 interface AuthFilterProps {
@@ -15,6 +16,7 @@ interface AuthFilterProps {
 }
 
 const AuthFilter = (props: AuthFilterProps) => {
+    const [authorizing, setAuthorizing] = useState(true);
     const navigate = useNavigate();
     const homeUrl = '/';
 
@@ -29,6 +31,7 @@ const AuthFilter = (props: AuthFilterProps) => {
                 if (props.setAccount) props.setAccount(account);
                 if (props.successUrl) navigate(props.successUrl);
                 await WalletAPI.loadContract();
+                setAuthorizing(false);
             } catch (err) {
                 props.setLoaded(false);
                 if (axios.isAxiosError(err)) {
@@ -43,7 +46,15 @@ const AuthFilter = (props: AuthFilterProps) => {
         authorize();
     }, [navigate]);
 
-    return null;
+    return (
+        <>
+            {
+                authorizing && (
+                    <LoadingComponent />
+                )
+            }
+        </>
+    );
 };
 
 export default AuthFilter;

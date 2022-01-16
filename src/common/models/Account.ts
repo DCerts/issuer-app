@@ -2,7 +2,7 @@ import { Role } from '.';
 
 interface Account {
     id: string,
-    role: Role,
+    role?: Role,
     name?: string,
     birthday?: string,
     email?: string,

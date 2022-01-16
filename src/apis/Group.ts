@@ -4,12 +4,12 @@ import Base from './Base';
 const GroupAPI = {
     createGroup: async (group: Group) => {
         return Base.auth().put(
-            `/group/${group.id}`,
+            `/groups/${group.id}`,
             group
         );
     },
-    getGroup: async (id: string) => {
-        return Base.auth().get(`/group/${id}`);
+    getGroup: async (id: number) => {
+        return Base.auth().get<Group>(`/groups/${id}`);
     }
 };
 
