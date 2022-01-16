@@ -1,0 +1,25 @@
+$fontSize: 200%;
+$margin: 20px;
+$background: #ea7e1a;
+
+.container {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .text {
+        margin: $margin;
+        font-size: $fontSize;
+        text-align: center;
+    }
+}
+
+.layout {
+    height: 100vh;
+    background-color: $background;
+    opacity: 50%;
+}

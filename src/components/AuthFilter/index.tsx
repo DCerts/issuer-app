@@ -5,6 +5,7 @@ import AccountAPI from '../../apis/Account';
 import { Account, Role } from '../../common/models';
 import WalletAPI from '../../web3/WalletAPI';
 import LoadingComponent from '../LoadingComponent';
+import { homeRoute } from '../../Routes';
 
 
 interface AuthFilterProps {
@@ -18,7 +19,7 @@ interface AuthFilterProps {
 const AuthFilter = (props: AuthFilterProps) => {
     const [authorizing, setAuthorizing] = useState(true);
     const navigate = useNavigate();
-    const homeUrl = '/';
+    const homeUrl = homeRoute.path;
 
     useEffect(() => {
         const authorize = async () => {

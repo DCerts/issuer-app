@@ -7,6 +7,7 @@ import SubmitButton from '../../components/SubmitButton';
 import WalletAPI from '../../web3/WalletAPI';
 import { Role } from '../../common/models';
 import GoBackIcon from '../../components/GoBackIcon';
+import { dashboardRoute } from '../../Routes';
 
 
 const CreateGroup = () => {
@@ -14,7 +15,7 @@ const CreateGroup = () => {
     const [groupName, setGroupName] = useState<string>('');
     const [groupThreshold, setGroupThreshold] = useState<number>(0);
     const [groupMembers, setGroupMembers] = useState<string[]>([]);
-    const backUrl = '/dashboard';
+    const backUrl = dashboardRoute.path;
 
     const createGroup = async () => {
         try {

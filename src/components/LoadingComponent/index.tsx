@@ -1,9 +1,12 @@
 import React from 'react';
+import styles from './index.module.scss';
 
 
 const LoadingComponent = () => {
     return (
-        <h3>{'Loading...'}</h3>
+        <div className={styles.container}>
+            <div className={styles.text}>{'Loading...'}</div>
+        </div>
     );
 };
 

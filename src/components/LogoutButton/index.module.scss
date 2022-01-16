@@ -1,0 +1,20 @@
+$padding: 10px;
+$fontSize: 120%;
+$fontColor: #000;
+$maxHeight: 100px;
+
+
+.button {
+    position: fixed;
+    max-height: $maxHeight;
+    padding: $padding;
+    font-size: $fontSize;
+    color: $fontColor;
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    text-decoration: underline;
+}

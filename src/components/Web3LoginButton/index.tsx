@@ -2,16 +2,19 @@ import React from 'react';
 import Auth from '../../apis/Auth';
 import { JWT_KEY } from '../../common/AuthConstants';
 import Core from '../../web3/Core';
+import styles from './index.module.scss';
 
 
 interface Web3LoginButtonProps {
     title?: string;
+    onClick?: () => void;
     onSuccess?: () => void;
     onFailure?: (err: any) => void;
 }
 
 const Web3LoginButton = (props: Web3LoginButtonProps) => {
     const handleClick = async () => {
+        if (props.onClick) props.onClick();
         const address = await Core.getAddress();
         if (address) {
             const nonce = (await Auth.fetchNonce(address)).data;
@@ -34,7 +37,7 @@ const Web3LoginButton = (props: Web3LoginButtonProps) => {
     };
 
     return (
-        <button onClick={handleClick}>{props.title}</button>
+        <button className={styles.button} onClick={handleClick}>{props.title}</button>
     );
 };
 

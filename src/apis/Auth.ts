@@ -14,6 +14,9 @@ const AuthAPI = {
                 signature: signature
             }
         );
+    },
+    logout: async () => {
+        return Base.auth().delete('/auth');
     }
 };
 

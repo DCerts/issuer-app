@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import { Account, Role } from '../../common/models';
-import GoBackIcon from '../../components/GoBackIcon';
 import AuthFilter from '../../components/AuthFilter';
+import { createGroupRoute, homeRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import LogoutButton from '../../components/LogoutButton';
+import styles from './index.module.scss';
 
 
 const Dashboard = () => {
@@ -14,46 +16,65 @@ const Dashboard = () => {
 
     return (
         <>
-            <GoBackIcon to={'/'} text={'Home'} />
+            <LogoutButton />
             <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
             {
                 loaded && (
-                    <>
-                        {
-                            account.role === Role.SCHOOL && (
+                    <div className={styles.container}>
+                        {account.role === Role.SCHOOL && (
+                            <>
                                 <MainFeatureIcon
                                     icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                                     title={'Create Group'}
-                                    descriptions={[
-                                        'Create and manage your own digital assets',
-                                        'Create and manage your own digital assets',
-                                        'Create and manage your own digital assets'
-                                    ]}
-                                    to={'/group/new'}
+                                    descriptions={[]}
+                                    to={createGroupRoute.path}
                                 />
-                            )
-                        }
+                                <MainFeatureIcon
+                                    icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
+                                    title={'Newsfeed'}
+                                    descriptions={[]}
+                                    to={newsfeedRoute.path}
+                                    notificationCount={6}
+                                />
+                            </>
+                        )}
+                        <MainFeatureIcon
+                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
+                            title={'Groups'}
+                            descriptions={[]}
+                            to={joinedGroupsRoute.path}
+                        />
                         <MainFeatureIcon
                             icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[
-                                'Create and manage your own digital assets',
-                                'Create and manage your own digital assets',
-                                'Create and manage your own digital assets'
-                            ]}
+                            descriptions={[]}
                             to={'/unknown'}
                         />
                         <MainFeatureIcon
                             icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[
-                                'Create and manage your own digital assets',
-                                'Create and manage your own digital assets',
-                                'Create and manage your own digital assets'
-                            ]}
+                            descriptions={[]}
                             to={'/unknown'}
                         />
-                    </>
+                        <MainFeatureIcon
+                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
+                            title={'Unknown'}
+                            descriptions={[]}
+                            to={'/unknown'}
+                        />
+                        <MainFeatureIcon
+                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
+                            title={'Unknown'}
+                            descriptions={[]}
+                            to={'/unknown'}
+                        />
+                        <MainFeatureIcon
+                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
+                            title={'Unknown'}
+                            descriptions={[]}
+                            to={'/unknown'}
+                        />
+                    </div>
                 )
             }
         </>

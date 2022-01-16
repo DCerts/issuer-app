@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import GroupAPI from '../../apis/Group';
 import Role from '../../common/models/Role';
-import AuthFilter from '../../components/AuthFilter';
-import GoBackIcon from '../../components/GoBackIcon';
-import GroupInfo from '../../components/GroupInfo';
-import SubmitButton from '../../components/SubmitButton';
+import AuthFilter from '../AuthFilter';
+import GoBackIcon from '../GoBackIcon';
+import GroupInfo from '../GroupInfo';
+import SubmitButton from '../SubmitButton';
+import { dashboardRoute } from '../../Routes';
 import WalletAPI from '../../web3/WalletAPI';
 
 
@@ -14,7 +15,7 @@ interface ConfirmGroupProps {
 
 const ConfirmGroup = (props: ConfirmGroupProps) => {
     const [loaded, setLoaded] = useState(false);
-    const backUrl = '/dashboard';
+    const backUrl = dashboardRoute.path;
 
     const confirmGroup = async () => {
         try {
