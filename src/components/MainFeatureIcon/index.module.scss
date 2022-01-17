@@ -4,6 +4,12 @@ $padding: 20px;
 $borderRadius: 10px;
 $boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $width: 300px;
+$height: 170px;
+
+$titleFontSize: 22px;
+$titleFontWeight: 600;
+
+$descriptionFontSize: 16px;
 
 $notifSize: 50px;
 $notifBackground: #ff0000;
@@ -25,6 +31,8 @@ $glooming: glooming linear 0.3s;
 
     margin: $margin;
     width: $width;
+    min-width: $width;
+    height: $height;
     animation: $zoomIn;
 
     padding: $padding;
@@ -32,6 +40,28 @@ $glooming: glooming linear 0.3s;
 
     background-color: $background;
     box-shadow: $boxShadow;
+
+    img {
+        display: flex;
+        position: absolute;
+        right: 5%;
+        opacity: 20%;
+    }
+}
+
+.title {
+    position: relative;
+    font-size: $titleFontSize;
+    font-weight: $titleFontWeight;
+}
+
+.descriptions {
+    position: absolute;
+    top: 40%;
+
+    .description {
+        font-size: $descriptionFontSize;
+    }
 }
 
 .container:hover {

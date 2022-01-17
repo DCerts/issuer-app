@@ -4,10 +4,10 @@ import styles from './index.module.scss';
 
 
 interface MainFeatureIconProps {
-    icon: string,
+    icon?: string,
     title: string,
-    descriptions: Array<string>,
-    to: string,
+    descriptions?: string[],
+    to?: string,
     notificationCount?: number
 }
 
@@ -15,14 +15,20 @@ const MainFeatureIcon = (props: MainFeatureIconProps) => {
     const navigate = useNavigate();
 
     return (
-        <div className={styles.container} onClick={() => navigate(props.to)}>
-            <img src={props.icon} />
-            <div>{props.title}</div>
-            <div>
-                {props.descriptions.map((item, index) => (
-                    <div key={index}>{item}</div>
-                ))}
-            </div>
+        <div className={styles.container} onClick={() => {
+            if (props.to) navigate(props.to);
+        }}>
+            <div className={styles.title}>{props.title}</div>
+            {props.icon && (
+                <img src={props.icon} />
+            )}
+            {props.descriptions && (
+                <div className={styles.descriptions}>
+                    {props.descriptions.map((item, index) => (
+                        <div className={styles.description} key={index}>{item}</div>
+                    ))}
+                </div>
+            )}
             {props.notificationCount && (
                 <div className={styles.notif}>{props.notificationCount}</div>
             )}

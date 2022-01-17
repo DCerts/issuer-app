@@ -1,12 +1,11 @@
 $padding: 10px;
 $fontSize: 120%;
 $fontColor: #000;
-$maxHeight: 100px;
 
 
 .button {
     position: fixed;
-    max-height: $maxHeight;
+    top: 0;
     padding: $padding;
     font-size: $fontSize;
     color: $fontColor;

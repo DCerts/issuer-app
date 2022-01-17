@@ -1,6 +1,7 @@
 $fontSize: 200%;
 $margin: 20px;
-$background: #ea7e1a;
+$background: #000;
+$textMinWidth: 180px;
 
 .container {
     display: flex;
@@ -12,8 +13,10 @@ $background: #ea7e1a;
     transform: translate(-50%, -50%);
 
     .text {
+        position: relative;
         margin: $margin;
         font-size: $fontSize;
+        min-width: $textMinWidth;
         text-align: center;
     }
 }
@@ -21,5 +24,17 @@ $background: #ea7e1a;
 .layout {
     height: 100vh;
     background-color: $background;
-    opacity: 50%;
+    animation: changeOpacity 2.5s linear infinite;
+}
+
+@keyframes changeOpacity {
+	0% {
+        opacity: 10%;
+    }
+    50% {
+        opacity: 40%;
+    }
+    100% {
+        opacity: 10%;
+    }
 }

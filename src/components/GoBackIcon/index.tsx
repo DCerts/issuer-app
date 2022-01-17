@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './index.module.scss';
 
 
 interface GoBackIconProps {
     text: string,
-    to: string
+    to?: string,
+    onClick?: () => void,
 }
 
 const GoBackButton = (props: GoBackIconProps) => {
@@ -12,7 +14,10 @@ const GoBackButton = (props: GoBackIconProps) => {
 
     return (
         <div>
-            <button onClick={() => navigate(props.to)}>
+            <button className={styles.button} onClick={() => {
+                if (props.onClick) props.onClick();
+                if (props.to) navigate(props.to);
+            }}>
                 {props.text}
             </button>
         </div>

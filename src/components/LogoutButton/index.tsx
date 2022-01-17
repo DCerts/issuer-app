@@ -1,27 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import AuthAPI from '../../apis/Auth';
 import { homeRoute } from '../../Routes';
-import styles from './index.module.scss';
+import GoBackButton from '../GoBackIcon';
 
 
 const LogoutButton = () => {
-    const navigate = useNavigate();
-
     const logout = async () => {
         try {
             await AuthAPI.logout();
-        } catch {} finally {
-            navigate(homeRoute.path);
-        }
+        } catch {}
     };
 
     return (
-        <>
-            <button className={styles.button} onClick={logout}>
-                {'Log out'}
-            </button>
-        </>
+        <GoBackButton
+            to={homeRoute.path}
+            onClick={logout}
+            text={'Log out'}
+        />
     );
 };
 

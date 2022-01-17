@@ -24,55 +24,38 @@ const Dashboard = () => {
                         {account.role === Role.SCHOOL && (
                             <>
                                 <MainFeatureIcon
-                                    icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
-                                    title={'Create Group'}
-                                    descriptions={[]}
-                                    to={createGroupRoute.path}
-                                />
-                                <MainFeatureIcon
-                                    icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                                     title={'Newsfeed'}
-                                    descriptions={[]}
+                                    descriptions={[
+                                        'You have some notifications!',
+                                        'You have some notifications!'
+                                    ]}
                                     to={newsfeedRoute.path}
                                     notificationCount={6}
+                                />
+                                <MainFeatureIcon
+                                    title={'Create Group'}
+                                    to={createGroupRoute.path}
                                 />
                             </>
                         )}
                         <MainFeatureIcon
-                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Groups'}
-                            descriptions={[]}
                             to={joinedGroupsRoute.path}
                         />
                         <MainFeatureIcon
-                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[]}
-                            to={'/unknown'}
                         />
                         <MainFeatureIcon
-                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[]}
-                            to={'/unknown'}
                         />
                         <MainFeatureIcon
-                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[]}
-                            to={'/unknown'}
                         />
                         <MainFeatureIcon
-                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[]}
-                            to={'/unknown'}
                         />
                         <MainFeatureIcon
-                            icon={'https://cdn-icons-png.flaticon.com/128/29/29670.png'}
                             title={'Unknown'}
-                            descriptions={[]}
-                            to={'/unknown'}
                         />
                     </div>
                 )

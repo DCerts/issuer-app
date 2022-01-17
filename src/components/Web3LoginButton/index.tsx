@@ -17,8 +17,8 @@ const Web3LoginButton = (props: Web3LoginButtonProps) => {
         if (props.onClick) props.onClick();
         const address = await Core.getAddress();
         if (address) {
-            const nonce = (await Auth.fetchNonce(address)).data;
             try {
+                const nonce = (await Auth.fetchNonce(address)).data;
                 const signature = await Core.sign(nonce, address);
 
                 if (signature) {
