@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
-import { createGroupRoute, homeRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import { createGroupRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import LogoutButton from '../../components/LogoutButton';
 import styles from './index.module.scss';
+import NewsAPI from '../../apis/News';
 
 
 const Dashboard = () => {
@@ -13,6 +14,18 @@ const Dashboard = () => {
         role: Role.ISSUER
     });
     const [loaded, setLoaded] = useState(false);
+    const [newsCount, setNewsCount] = useState<number>();
+
+    useEffect(() => {
+        const getNews = async () => {
+            try {
+                const news = (await NewsAPI.getNews()).data;
+                if (news && news.length) setNewsCount(news.length);
+            } catch {}
+        };
+
+        getNews();
+    }, [loaded]);
 
     return (
         <>
@@ -25,16 +38,9 @@ const Dashboard = () => {
                             <>
                                 <MainFeatureIcon
                                     title={'Newsfeed'}
-                                    descriptions={[
-                                        'You have some notifications!',
-                                        'You have some notifications!'
-                                    ]}
+                                    descriptions={[]}
                                     to={newsfeedRoute.path}
-                                    notificationCount={6}
-                                />
-                                <MainFeatureIcon
-                                    title={'Create Group'}
-                                    to={createGroupRoute.path}
+                                    notificationCount={newsCount}
                                 />
                             </>
                         )}
@@ -44,6 +50,7 @@ const Dashboard = () => {
                         />
                         <MainFeatureIcon
                             title={'Unknown'}
+                            to={createGroupRoute.path}
                         />
                         <MainFeatureIcon
                             title={'Unknown'}

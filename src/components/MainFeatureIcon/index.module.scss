@@ -6,8 +6,11 @@ $boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $width: 300px;
 $height: 170px;
 
+$idFontSize: 50px;
+$idFontWeight: 800;
+
 $titleFontSize: 22px;
-$titleFontWeight: 600;
+$titleFontWeight: 500;
 
 $descriptionFontSize: 16px;
 
@@ -47,6 +50,14 @@ $glooming: glooming linear 0.3s;
         right: 5%;
         opacity: 20%;
     }
+}
+
+.id {
+    position: absolute;
+    font-size: $idFontSize;
+    font-weight: $idFontWeight;
+    right: -5%;
+    top: -15%;
 }
 
 .title {

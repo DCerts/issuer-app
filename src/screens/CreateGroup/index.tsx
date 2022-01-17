@@ -8,25 +8,26 @@ import WalletAPI from '../../web3/WalletAPI';
 import { Role } from '../../common/models';
 import GoBackIcon from '../../components/GoBackIcon';
 import { dashboardRoute } from '../../Routes';
+import styles from './index.module.scss';
+import WaitingForTransaction from '../../components/WaitingForTransaction';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreateGroup = () => {
+    const navigate = useNavigate();
     const [loaded, setLoaded] = useState(false);
     const [groupName, setGroupName] = useState<string>('');
     const [groupThreshold, setGroupThreshold] = useState<number>(0);
     const [groupMembers, setGroupMembers] = useState<string[]>([]);
+    const [waiting, setWaiting] = useState(false);
     const backUrl = dashboardRoute.path;
 
     const createGroup = async () => {
         try {
-            const members = groupMembers.concat([
-                "0xd68854490261fa4c155a844db51d39493a9effb1",
-                "0xa25ac2bb455d33b0cd2f300024169d31fa4ec366",
-                "0xbad35b0833094dd410781585a7f5321654816ab9"
-            ]);
+            setWaiting(true);
             const groupId = await WalletAPI.createGroup(
                 groupName,
-                members,
+                groupMembers,
                 groupThreshold
             );
             if (groupId) {
@@ -37,9 +38,10 @@ const CreateGroup = () => {
                     members: groupMembers
                 };
                 await GroupAPI.createGroup(group);
+                navigate(backUrl);
             }
-        } catch (err) {
-            console.log(err);
+        } catch {
+            setWaiting(false);
         }
     };
 
@@ -54,20 +56,34 @@ const CreateGroup = () => {
             {
                 loaded && (
                     <>
-                        <SimpleInput
-                            placeholder={'Name'}
-                            onChange={setGroupName}
-                        />
-                        <SimpleInput
-                            placeholder={'Threshold'}
-                            onChange={(text) => {
-                                setGroupThreshold(Number.parseInt(text));
-                            }}
-                        />
-                        <SubmitButton
-                            title={'Create'}
-                            onClick={createGroup}
-                        />
+                        <div className={styles.container}>
+                            <SimpleInput
+                                placeholder={'Name'}
+                                onChange={setGroupName}
+                            />
+                            <SimpleInput
+                                placeholder={'Threshold'}
+                                onChange={(text) => {
+                                    setGroupThreshold(Number.parseInt(text));
+                                }}
+                            />
+                            <SimpleInput
+                                placeholder={'Members'}
+                                onChange={(text) => {
+                                    setGroupMembers(text.split(','));
+                                }}
+                            />
+                            <div className={styles.submit}>
+                                <SubmitButton
+                                    title={'Create!'}
+                                    confirm={true}
+                                    onClick={createGroup}
+                                />
+                            </div>
+                        </div>
+                        {waiting && (
+                            <WaitingForTransaction />
+                        )}
                     </>
                 )
             }

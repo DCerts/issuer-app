@@ -1,0 +1,26 @@
+$fontSize: 18px;
+$padding: 20px;
+$borderRadius: 10px;
+$boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$hoverBoxShadow: 0 0 30px rgba(0, 0, 0, 0.1);
+$margin: 20px;
+
+
+.container {
+    display: flex;
+    align-items: center;
+
+    input {
+        font-size: $fontSize;
+        border: none;
+        box-shadow: $boxShadow;
+        border-radius: $borderRadius;
+        padding: $padding;
+        margin: $margin;
+        width: 100vh;
+    }
+
+    input:hover {
+        box-shadow: $hoverBoxShadow;
+    }
+}

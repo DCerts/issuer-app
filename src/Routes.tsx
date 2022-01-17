@@ -2,6 +2,7 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import CreateGroup from './screens/CreateGroup';
 import Dashboard from './screens/Dashboard';
+import GroupDashboard from './screens/GroupDashboard';
 import Home from './screens/Home';
 import JoinedGroups from './screens/JoinedGroups';
 import Newsfeed from './screens/Newsfeed';
@@ -18,7 +19,7 @@ export const dashboardRoute = {
 };
 
 export const createGroupRoute = {
-    path: '/group/new',
+    path: '/groups/new',
     element: <CreateGroup />
 };
 
@@ -26,6 +27,11 @@ export const joinedGroupsRoute = {
     path: '/groups',
     element: <JoinedGroups />
 };
+
+export const groupDashboardRoute = {
+    path: '/groups/:groupId',
+    element: <GroupDashboard />
+}
 
 export const newsfeedRoute = {
     path: '/newsfeed',
@@ -38,7 +44,8 @@ const Routes = () => {
         dashboardRoute,
         createGroupRoute,
         joinedGroupsRoute,
-        newsfeedRoute
+        newsfeedRoute,
+        groupDashboardRoute
     ]);
 
     return (

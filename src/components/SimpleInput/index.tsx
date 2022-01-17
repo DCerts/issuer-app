@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './index.module.scss';
 
 
 interface SimpleInputProps {
@@ -10,12 +11,14 @@ interface SimpleInputProps {
 
 const SimpleInput = (props: SimpleInputProps) => {
     return (
-        <input
-            type={props.type}
-            placeholder={props.placeholder}
-            value={props.value}
-            onChange={(e) => props.onChange(e.target.value)}
-        />
+        <div className={styles.container}>
+            <input
+                type={props.type}
+                placeholder={props.placeholder}
+                value={props.value}
+                onChange={(e) => props.onChange(e.target.value)}
+            />
+        </div>
     );
 };
 

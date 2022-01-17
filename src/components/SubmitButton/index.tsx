@@ -1,14 +1,29 @@
 import React from 'react';
+import styles from './index.module.scss';
 
 
 interface SubmitButtonProps {
-    title: string;
     onClick: () => void;
+    title?: string;
+    confirm?: boolean;
 }
 
 const SubmitButton = (props: SubmitButtonProps) => {
     return (
-        <button onClick={props.onClick}>{props.title}</button>
+        <div className={styles.container}>
+            <button
+                className={
+                    props.title ? styles.submit : (
+                        props.confirm ? styles.confirm : styles.reject
+                    )
+                }
+                onClick={props.onClick}
+            >
+                {props.title && (
+                    <div className={styles.text}>{props.title}</div>
+                )}
+            </button>
+        </div>
     );
 };
 

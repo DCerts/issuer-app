@@ -17,6 +17,7 @@ const GoBackButton = (props: GoBackIconProps) => {
             <button className={styles.button} onClick={() => {
                 if (props.onClick) props.onClick();
                 if (props.to) navigate(props.to);
+                else navigate(-1);
             }}>
                 {props.text}
             </button>

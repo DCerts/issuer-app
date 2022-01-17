@@ -1,0 +1,77 @@
+$buttonFontColor: #fff;
+$buttonSize: 50px;
+$buttonBorder: 2px solid #000;
+$buttonPadding: 20px;
+$buttonMargin: 6px;
+
+$zoomOut: zoomOut linear 0.2s forwards;
+$zoomIn: zoomIn linear 0.2s forwards;
+
+$confirmColor: rgb(81, 240, 128);
+$rejectColor: rgb(241, 57, 57);
+
+$submitWidth: 200px;
+$submitFontSize: 20px;
+$submitFontColor: #000;
+$submitBorderRadius: 10px;
+
+
+.container {
+    position: relative;
+    justify-content: center;
+
+    button {
+        color: $buttonFontColor;
+        height: $buttonSize;
+        border: none;
+        padding: $buttonPadding;
+        margin: $buttonMargin;
+        animation: $zoomIn;
+    }
+
+    button:hover {
+        cursor: pointer;
+        z-index: 1;
+        animation: $zoomOut;
+    }
+}
+
+.confirm, .reject {
+    border-radius: 50%;
+    width: $buttonSize;
+}
+
+.submit {
+    position: relative;
+    width: $submitWidth;
+    background-color: $confirmColor;
+    font-size: $submitFontSize;
+    border-radius: $submitBorderRadius;
+
+    .text {
+        line-height: 0%;
+        color: $submitFontColor;
+    }
+}
+
+.confirm {
+    background-color: $confirmColor;
+}
+
+.reject {
+    background-color: $rejectColor;
+}
+
+@keyframes zoomOut {
+    from {}
+    to {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.2);
+    }
+    to {}
+}

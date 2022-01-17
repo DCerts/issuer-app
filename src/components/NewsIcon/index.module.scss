@@ -1,0 +1,81 @@
+$background: #fff;
+$margin: 60px 40px 0;
+$padding: 20px;
+$borderRadius: 10px;
+$boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$width: 600px;
+$height: 80px;
+
+$titleFontSize: 22px;
+$titleFontWeight: 500;
+
+$hiddenTextFontWeight: 600;
+
+$zoomOut: zoomOut linear 0.2s forwards;
+$zoomIn: zoomIn linear 0.2s forwards;
+
+
+.container {
+    display: flex;
+    position: relative;
+
+    margin: $margin;
+    width: $width;
+    min-width: $width;
+    height: $height;
+    animation: $zoomIn;
+
+    padding: $padding;
+    border-radius: $borderRadius;
+
+    background-color: $background;
+    box-shadow: $boxShadow;
+
+    img {
+        display: flex;
+        position: absolute;
+        right: 5%;
+        opacity: 20%;
+    }
+}
+
+.title {
+    position: relative;
+    font-size: $titleFontSize;
+    font-weight: $titleFontWeight;
+}
+
+.container:hover {
+    cursor: pointer;
+    animation: $zoomOut;
+    z-index: 1;
+
+    .title {
+        opacity: 0%;
+    }
+
+    .hiddenText {
+        opacity: 100%;
+    }
+}
+
+.hiddenText {
+    position: absolute;
+    font-size: $titleFontSize;
+    font-weight: $hiddenTextFontWeight;
+    opacity: 0%;
+}
+
+@keyframes zoomOut {
+    from {}
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.1);
+    }
+    to {}
+}

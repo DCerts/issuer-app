@@ -1,0 +1,25 @@
+$background: #000;
+
+
+.container {
+    display: flex;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    background-color: $background;
+    animation: changeOpacity 2.5s linear infinite;
+    z-index: 1;
+}
+
+@keyframes changeOpacity {
+	0% {
+        opacity: 10%;
+    }
+    50% {
+        opacity: 40%;
+    }
+    100% {
+        opacity: 10%;
+    }
+}

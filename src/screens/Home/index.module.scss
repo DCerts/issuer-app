@@ -1,6 +1,5 @@
 $fontSize: 200%;
 $margin: 20px;
-$background: #000;
 $textMinWidth: 180px;
 
 .container {
@@ -18,23 +17,5 @@ $textMinWidth: 180px;
         font-size: $fontSize;
         min-width: $textMinWidth;
         text-align: center;
-    }
-}
-
-.layout {
-    height: 100vh;
-    background-color: $background;
-    animation: changeOpacity 2.5s linear infinite;
-}
-
-@keyframes changeOpacity {
-	0% {
-        opacity: 10%;
-    }
-    50% {
-        opacity: 40%;
-    }
-    100% {
-        opacity: 10%;
     }
 }

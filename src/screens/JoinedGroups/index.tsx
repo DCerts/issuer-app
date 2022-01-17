@@ -3,8 +3,9 @@ import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
-import GroupInfo from '../../components/GroupInfo';
-import { dashboardRoute } from '../../Routes';
+import LoadingComponent from '../../components/LoadingComponent';
+import MainFeatureIcon from '../../components/MainFeatureIcon';
+import styles from './index.module.scss';
 
 
 const JoinedGroups = () => {
@@ -23,17 +24,25 @@ const JoinedGroups = () => {
 
     return (
         <>
-            <GoBackButton to={dashboardRoute.path} text={'Back'} />
+            <GoBackButton text={'Back'} />
             <AuthFilter setLoaded={setLoaded} />
             {
                 loaded && (
-                    <>
-                        {groups.map((group, index) => (
-                            <div key={index}>
-                                <GroupInfo groupId={group.id} />
-                            </div>
+                    <div className={styles.container}>
+                        {(groups.length > 0) && groups.map((group, index) => (
+                            <MainFeatureIcon
+                                id={group.id}
+                                title={group.name}
+                                to={`/groups/${group.id}`}
+                                key={index}
+                            />
                         ))}
-                    </>
+                        {!groups.length && (
+                            <LoadingComponent
+                                text={'You have not joined any groups yet.'}
+                            />
+                        )}
+                    </div>
                 )
             }
         </>

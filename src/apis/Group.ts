@@ -14,6 +14,9 @@ const GroupAPI = {
     confirmGroup: async (id: number) => {
         return Base.auth().put(`/groups/${id}`);
     },
+    rejectGroup: async (id: number) => {
+        return Base.auth().delete(`/groups/${id}`);
+    },
     getJoinedGroups: async () => {
         return Base.auth().get<Group[]>(`/groups`);
     }

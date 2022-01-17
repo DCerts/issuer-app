@@ -4,6 +4,7 @@ import AuthFilter from '../../components/AuthFilter';
 import { useNavigate } from 'react-router-dom';
 import { dashboardRoute } from '../../Routes';
 import styles from './index.module.scss';
+import WaitingForTransaction from '../../components/WaitingForTransaction';
 
 
 const Home = () => {
@@ -37,7 +38,7 @@ const Home = () => {
                             />
                         </div>
                         {signing && (
-                            <div className={styles.layout}></div>
+                            <WaitingForTransaction />
                         )}
                     </>
                 )

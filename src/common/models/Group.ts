@@ -3,7 +3,7 @@ interface Group {
     name: string;
     threshold: number;
     members: string[];
-    available?: number;
+    available?: boolean;
 }
 
 export default Group;

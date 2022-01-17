@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 
 
 interface MainFeatureIconProps {
+    id?: number | string,
     icon?: string,
     title: string,
     descriptions?: string[],
@@ -18,6 +19,9 @@ const MainFeatureIcon = (props: MainFeatureIconProps) => {
         <div className={styles.container} onClick={() => {
             if (props.to) navigate(props.to);
         }}>
+            {props.id && (
+                <div className={styles.id}>{'#'}{props.id}</div>
+            )}
             <div className={styles.title}>{props.title}</div>
             {props.icon && (
                 <img src={props.icon} />
