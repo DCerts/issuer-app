@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import GroupAPI from '../../apis/Group';
-import Role from '../../common/models/Role';
 import Account, { EMPTY } from '../../common/models/Account';
 import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
@@ -24,7 +23,9 @@ const GroupDashboard = () => {
         try {
             const id = Number.parseInt(groupId || '');
             setGroup((await GroupAPI.getGroup(id)).data);
-        } catch {}
+        } catch {
+            navigate(-1);
+        }
     };
 
     useEffect(() => {

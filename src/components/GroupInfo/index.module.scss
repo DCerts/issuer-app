@@ -14,6 +14,8 @@ $textFontSize: 16px;
 $titleFontSize: 22px;
 $titleFontWeight: 600;
 
+$zoomIn: zoomIn linear 0.2s forwards;
+
 
 .container {
     display: flex;
@@ -23,6 +25,7 @@ $titleFontWeight: 600;
     width: $width;
     min-width: $width;
     height: $height;
+    animation: $zoomIn;
 
     padding: $padding;
     border-radius: $borderRadius;
@@ -32,6 +35,7 @@ $titleFontWeight: 600;
 }
 
 .id {
+    text-align: right;
     position: absolute;
     font-size: $idFontSize;
     font-weight: $idFontWeight;
@@ -56,4 +60,11 @@ $titleFontWeight: 600;
     position: absolute;
     bottom: 0%;
     right: -5%;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.1);
+    }
+    to {}
 }

@@ -41,6 +41,10 @@ const Dashboard = () => {
                                     to={newsfeedRoute.path}
                                     notificationCount={newsCount}
                                 />
+                                <MainFeatureIcon
+                                    title={'Members'}
+                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471010.png'}
+                                />
                             </>
                         )}
                         <MainFeatureIcon
@@ -50,7 +54,6 @@ const Dashboard = () => {
                         />
                         <MainFeatureIcon
                             title={'Unknown'}
-                            icon={'https://cdn-icons-png.flaticon.com/128/4471/4471010.png'}
                         />
                         <MainFeatureIcon
                             title={'Unknown'}
