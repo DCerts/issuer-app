@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
-import { createGroupRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import { joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import LogoutButton from '../../components/LogoutButton';
 import styles from './index.module.scss';
 import NewsAPI from '../../apis/News';
+import { EMPTY } from '../../common/models/Account';
 
 
 const Dashboard = () => {
-    const [account, setAccount] = useState<Account>({
-        id: '',
-        role: Role.ISSUER
-    });
+    const [account, setAccount] = useState<Account>(EMPTY);
     const [loaded, setLoaded] = useState(false);
     const [newsCount, setNewsCount] = useState<number>();
 
@@ -38,6 +36,7 @@ const Dashboard = () => {
                             <>
                                 <MainFeatureIcon
                                     title={'Newsfeed'}
+                                    icon={'https://cdn-icons-png.flaticon.com/128/4470/4470996.png'}
                                     descriptions={[]}
                                     to={newsfeedRoute.path}
                                     notificationCount={newsCount}
@@ -46,10 +45,12 @@ const Dashboard = () => {
                         )}
                         <MainFeatureIcon
                             title={'Groups'}
+                            icon={'https://cdn-icons-png.flaticon.com/128/4471/4471005.png'}
                             to={joinedGroupsRoute.path}
                         />
                         <MainFeatureIcon
                             title={'Unknown'}
+                            icon={'https://cdn-icons-png.flaticon.com/128/4471/4471010.png'}
                         />
                         <MainFeatureIcon
                             title={'Unknown'}

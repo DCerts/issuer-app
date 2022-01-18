@@ -9,4 +9,8 @@ interface Account {
     nonce?: string
 }
 
+export const EMPTY: Account = {
+    id: ''
+};
+
 export default Account;

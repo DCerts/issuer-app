@@ -1,6 +1,7 @@
 import React from 'react';
 import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
+import Role from '../../common/models/Role';
 import WalletAPI from '../../web3/WalletAPI';
 import SubmitButton from '../SubmitButton';
 import styles from './index.module.scss';
@@ -8,6 +9,7 @@ import styles from './index.module.scss';
 
 interface GroupInfoProps {
     group: Group;
+    role?: Role;
     onSuccess?: () => void;
     onFailure?: (err: any) => void;
     onSubmit?: () => void;
@@ -48,7 +50,7 @@ const GroupInfo = (props: GroupInfoProps) => {
                     <div className={styles.text}>
                         {'Threshold: '}{props.group.threshold}
                     </div>
-                    {!props.group.available && (
+                    {!props.group.available && props.role === Role.SCHOOL && (
                         <div className={styles.submit}>
                             <SubmitButton
                                 confirm={true}
