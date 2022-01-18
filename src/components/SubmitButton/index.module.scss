@@ -6,14 +6,20 @@ $buttonMargin: 6px;
 
 $zoomOut: zoomOut linear 0.2s forwards;
 $zoomIn: zoomIn linear 0.2s forwards;
+$appear: appear linear 0.2s forwards;
 
 $confirmColor: rgb(81, 240, 128);
 $rejectColor: rgb(241, 57, 57);
 
-$submitWidth: 200px;
+$submitWidth: 150px;
 $submitFontSize: 20px;
 $submitFontColor: #000;
 $submitBorderRadius: 10px;
+
+$hiddenTextRight: 70px;
+$hiddenTextTop: 20px;
+$hiddenTextFontSize: 18px;
+$hiddenTextFontWeight: 500;
 
 
 .container {
@@ -33,6 +39,22 @@ $submitBorderRadius: 10px;
         cursor: pointer;
         z-index: 1;
         animation: $zoomOut;
+    }
+}
+
+.hidden {
+    opacity: 0%;
+    position: absolute;
+    right: $hiddenTextRight;
+    top: $hiddenTextTop;
+    font-size: $hiddenTextFontSize;
+    font-weight: $hiddenTextFontWeight;
+    text-align: right;
+}
+
+.container:hover {
+    .hidden {
+        animation: $appear;
     }
 }
 
@@ -74,4 +96,11 @@ $submitBorderRadius: 10px;
         transform: scale(1.2);
     }
     to {}
+}
+
+@keyframes appear {
+    from {}
+    to {
+        opacity: 100%;
+    }
 }

@@ -20,7 +20,6 @@ const CreateGroup = () => {
     const [groupThreshold, setGroupThreshold] = useState<number>(0);
     const [groupMembers, setGroupMembers] = useState<string[]>([]);
     const [waiting, setWaiting] = useState(false);
-    const backUrl = dashboardRoute.path;
 
     const createGroup = async () => {
         try {
@@ -38,7 +37,7 @@ const CreateGroup = () => {
                     members: groupMembers
                 };
                 await GroupAPI.createGroup(group);
-                navigate(backUrl);
+                navigate(-1);
             }
         } catch {
             setWaiting(false);
@@ -47,11 +46,11 @@ const CreateGroup = () => {
 
     return (
         <>
-            <GoBackIcon to={backUrl} text={'Back'} />
+            <GoBackIcon text={'Back'} />
             <AuthFilter
                 setLoaded={setLoaded}
                 role={Role.SCHOOL}
-                fallbackUrl={backUrl}
+                fallbackUrl={dashboardRoute.path}
             />
             {
                 loaded && (

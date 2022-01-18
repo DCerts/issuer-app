@@ -12,7 +12,7 @@ import styles from './index.module.scss';
 
 const Newsfeed = () => {
     const [loaded, setLoaded] = useState(false);
-    const [news, setNews] = useState<NewsDatum<DatumType>[]>([]);
+    const [news, setNews] = useState<NewsDatum<DatumType>[] | undefined>();
 
     useEffect(() => {
         const getNews = async () => {
@@ -21,7 +21,7 @@ const Newsfeed = () => {
             } catch {}
         };
 
-        getNews();
+        if (loaded) getNews();
     }, [loaded]);
 
     return (
@@ -33,7 +33,7 @@ const Newsfeed = () => {
                 fallbackUrl={dashboardRoute.path}
             />
             {
-                loaded && (
+                loaded && news && (
                     <div className={styles.container}>
                         {(news.length > 0) && news.map((value, index) => (
                             <NewsIcon

@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import GroupAPI from '../../apis/Group';
+import { Account, Role } from '../../common/models';
 import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
+import NewsIcon from '../../components/NewsIcon';
+import { createGroupRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
 const JoinedGroups = () => {
     const [loaded, setLoaded] = useState(false);
-    const [groups, setGroups] = useState<Group[]>([]);
+    const [account, setAccount] = useState<Account>();
+    const [groups, setGroups] = useState<Group[] | undefined>();
 
     useEffect(() => {
         const fetchGroups = async () => {
@@ -19,16 +23,23 @@ const JoinedGroups = () => {
             } catch {}
         };
 
-        fetchGroups();
-    }, []);
+        if (loaded) fetchGroups();
+    }, [loaded]);
 
     return (
         <>
             <GoBackButton text={'Back'} />
-            <AuthFilter setLoaded={setLoaded} />
+            <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
             {
-                loaded && (
+                loaded && groups && (
                     <div className={styles.container}>
+                        {account && account.role === Role.SCHOOL && (
+                            <NewsIcon
+                                title={'You need a new group, do you?'}
+                                hoverTitle={'Create one now!'}
+                                url={createGroupRoute.path}
+                            />
+                        )}
                         {(groups.length > 0) && groups.map((group, index) => (
                             <MainFeatureIcon
                                 id={group.id}

@@ -54,12 +54,12 @@ $zoomIn: zoomIn linear 0.2s forwards;
         opacity: 0%;
     }
 
-    .hiddenText {
+    .hidden {
         opacity: 100%;
     }
 }
 
-.hiddenText {
+.hidden {
     position: absolute;
     font-size: $titleFontSize;
     font-weight: $hiddenTextFontWeight;

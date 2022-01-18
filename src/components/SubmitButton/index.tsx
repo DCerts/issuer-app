@@ -11,6 +11,11 @@ interface SubmitButtonProps {
 const SubmitButton = (props: SubmitButtonProps) => {
     return (
         <div className={styles.container}>
+            {!props.title && (
+                <div className={styles.hidden}>
+                    {props.confirm ? ('Confirm') : ('Reject')}
+                </div>
+            )}
             <button
                 className={
                     props.title ? styles.submit : (

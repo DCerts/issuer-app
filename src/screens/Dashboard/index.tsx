@@ -24,8 +24,8 @@ const Dashboard = () => {
             } catch {}
         };
 
-        getNews();
-    }, [loaded]);
+        if (loaded && account.role === Role.SCHOOL) getNews();
+    }, [loaded, account.role]);
 
     return (
         <>

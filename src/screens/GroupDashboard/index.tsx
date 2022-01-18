@@ -25,8 +25,8 @@ const GroupDashboard = () => {
     };
 
     useEffect(() => {
-        fetchGroup();
-    }, [groupId]);
+        if (loaded) fetchGroup();
+    }, [loaded, groupId]);
 
     return (
         <>
