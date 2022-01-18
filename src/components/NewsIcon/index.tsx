@@ -19,10 +19,10 @@ const NewsIcon = (props: NewsIconProps) => {
 
     const getTitle = () => {
         if (props.type === NewsType.GROUP_CREATED) {
-            return `Group ${props.datum} has been created.`;
+            return `Group #${props.datum} has been created.`;
         }
         if (props.type === NewsType.BATCH_CREATED) {
-            return `Batch ${props.datum} has been created.`;
+            return `Batch #${props.datum} has been created.`;
         }
         return props.title;
     };

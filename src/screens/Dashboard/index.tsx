@@ -50,7 +50,6 @@ const Dashboard = () => {
                         />
                         <MainFeatureIcon
                             title={'Unknown'}
-                            to={createGroupRoute.path}
                         />
                         <MainFeatureIcon
                             title={'Unknown'}
