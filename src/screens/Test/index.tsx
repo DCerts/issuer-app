@@ -21,10 +21,6 @@ const Test = () => {
         if (loaded) test();
     }, [loaded]);
 
-    const onMessage = async (payload: any) => {
-        console.log(payload);
-    };
-
     return (
         <>
             <GoBackButton
