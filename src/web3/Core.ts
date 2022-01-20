@@ -1,12 +1,10 @@
 import Web3 from 'web3';
 
 
+export class Web3NotEnableError extends Error {}
+
 class Core {
     private web3: Web3 | undefined;
-
-    constructor() {
-        this.connect();
-    }
 
     getAddress() {
         if (this.web3) {
@@ -18,13 +16,19 @@ class Core {
         return this.web3;
     }
 
+    getLatestBlock() {
+        if (this.web3) {
+            return this.web3.eth.getBlockNumber();
+        }
+    }
+
     async connect() {
         if (window.ethereum) {
             this.web3 = new Web3(window.ethereum);
             await window.ethereum.enable();
         }
         else {
-            console.error('No web3? You should consider trying MetaMask!');
+            throw new Web3NotEnableError();
         }
     }
 

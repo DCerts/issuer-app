@@ -17,7 +17,7 @@ let contract: Contract;
 const Wallet = {
     /**
      * Connects to the contract MultiSigWallet.
-     * @returns true if connected; otherwise, undefined.
+     * @returns the contract if connected; otherwise, undefined.
      */
     connect: async () => {
         const web3 = Core.getWeb3();

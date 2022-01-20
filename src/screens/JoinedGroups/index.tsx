@@ -35,7 +35,7 @@ const JoinedGroups = () => {
                     <div className={styles.container}>
                         {account && account.role === Role.SCHOOL && (
                             <NewsIcon
-                                title={'You need a new group, do you?'}
+                                title={'You need a new group, don\'t you?'}
                                 hoverTitle={'Create one now!'}
                                 url={createGroupRoute.path}
                             />

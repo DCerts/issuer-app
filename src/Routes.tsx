@@ -6,6 +6,7 @@ import GroupDashboard from './screens/GroupDashboard';
 import Home from './screens/Home';
 import JoinedGroups from './screens/JoinedGroups';
 import Newsfeed from './screens/Newsfeed';
+import Test from './screens/Test';
 
 
 export const homeRoute = {
@@ -38,8 +39,14 @@ export const newsfeedRoute = {
     element: <Newsfeed />
 };
 
+export const testRoute = {
+    path: '/test',
+    element: <Test />
+};
+
 const Routes = () => {
     const routes = useRoutes([
+        testRoute,
         homeRoute,
         dashboardRoute,
         createGroupRoute,

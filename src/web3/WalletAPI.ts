@@ -18,14 +18,13 @@ class WalletAPI {
         }
     }
 
-    async createGroup(name: string, members: string[], threshold: number) {
+    async createGroup(groupId: number, name: string, members: string[], threshold: number) {
         if (this.contract) {
             const address = await Core.getAddress();
-            const groupId: number = (await this.contract.methods.addGroup(name, members, threshold).send({
+            await this.contract.methods.addGroup(groupId, name, members, threshold).send({
                 from: address,
                 gas: 1000000
-            })).events.GroupWaitingForConfirmation.returnValues.groupId;
-            return groupId;
+            });
         }
     }
 

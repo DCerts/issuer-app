@@ -19,8 +19,8 @@ const GroupInfo = (props: GroupInfoProps) => {
     const confirmGroup = async () => {
         try {
             if (props.onSubmit) props.onSubmit();
-            await WalletAPI.confirmGroup(props.group.id);
             await GroupAPI.confirmGroup(props.group.id);
+            WalletAPI.confirmGroup(props.group.id)
             if (props.onSuccess) props.onSuccess();
         } catch (err) {
             if (props.onFailure) props.onFailure(err);

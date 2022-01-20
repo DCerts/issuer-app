@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateGroup = () => {
     const navigate = useNavigate();
     const [loaded, setLoaded] = useState(false);
+    const [groupId, setGroupId] = useState<number>(0);
     const [groupName, setGroupName] = useState<string>('');
     const [groupThreshold, setGroupThreshold] = useState<number>(0);
     const [groupMembers, setGroupMembers] = useState<string[]>([]);
@@ -24,11 +25,6 @@ const CreateGroup = () => {
     const createGroup = async () => {
         try {
             setWaiting(true);
-            const groupId = await WalletAPI.createGroup(
-                groupName,
-                groupMembers,
-                groupThreshold
-            );
             if (groupId) {
                 const group: Group = {
                     id: groupId,
@@ -36,6 +32,12 @@ const CreateGroup = () => {
                     threshold: groupThreshold,
                     members: groupMembers
                 };
+                await WalletAPI.createGroup(
+                    group.id,
+                    group.name,
+                    group.members,
+                    group.threshold
+                );
                 await GroupAPI.createGroup(group);
                 navigate(-1);
             }
@@ -56,6 +58,12 @@ const CreateGroup = () => {
                 loaded && (
                     <>
                         <div className={styles.container}>
+                            <SimpleInput
+                                placeholder={'Id'}
+                                onChange={(text) => {
+                                    setGroupId(Number.parseInt(text));
+                                }}
+                            />
                             <SimpleInput
                                 placeholder={'Name'}
                                 onChange={setGroupName}
