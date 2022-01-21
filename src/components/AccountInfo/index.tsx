@@ -20,16 +20,20 @@ const AccountInfo = (props: AccountInfoProps) => {
                         {props.account.id}
                     </div>
                     <div className={styles.text}>
-                        {props.account.name && (
-                            <div>{'Name: '}{props.account.name}</div>
-                        )}
-                        {props.account.email && (
-                            <TextShortCut
-                                header={'Email: '}
-                                text={props.account.email}
-                                url={'mailto:' + props.account.email}
-                            />
-                        )}
+                        <div>
+                            {props.account.name && (
+                                <div>{'Name: '}{props.account.name}</div>
+                            )}
+                        </div>
+                        <div>
+                            {props.account.email && (
+                                <TextShortCut
+                                    header={'Email: '}
+                                    text={props.account.email}
+                                    url={'mailto:' + props.account.email}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

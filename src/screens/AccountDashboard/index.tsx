@@ -7,6 +7,7 @@ import GoBackButton from '../../components/GoBackIcon';
 import AccountInfo from '../../components/AccountInfo';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import styles from './index.module.scss';
+import LoadingComponent from '../../components/LoadingComponent';
 
 
 const AccountDashboard = () => {
@@ -14,13 +15,14 @@ const AccountDashboard = () => {
     const [account, setAccount] = useState<Account>();
     const [loaded, setLoaded] = useState(false);
     const [waiting, setWaiting] = useState(false);
+    const [notFound, setNotFound] = useState(false);
     const navigate = useNavigate();
 
     const fetchAccount = async () => {
         try {
             setAccount((await AccountAPI.getById(accountId || '')).data);
         } catch {
-            navigate(-1);
+            setNotFound(true);
         }
     };
 
@@ -42,6 +44,11 @@ const AccountDashboard = () => {
                     />
                     <div className={styles.pane}></div>
                 </div>
+            )}
+            {loaded && notFound && (
+                <LoadingComponent
+                    text={'This member is not available.'}
+                />
             )}
             {waiting && (
                 <WaitingForTransaction />

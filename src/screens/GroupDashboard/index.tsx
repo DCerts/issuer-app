@@ -6,6 +6,7 @@ import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import GroupInfo from '../../components/GroupInfo';
+import LoadingComponent from '../../components/LoadingComponent';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import styles from './index.module.scss';
@@ -17,6 +18,7 @@ const GroupDashboard = () => {
     const [group, setGroup] = useState<Group>();
     const [loaded, setLoaded] = useState(false);
     const [waiting, setWaiting] = useState(false);
+    const [notFound, setNotFound] = useState(false);
     const navigate = useNavigate();
 
     const fetchGroup = async () => {
@@ -24,7 +26,7 @@ const GroupDashboard = () => {
             const id = Number.parseInt(groupId || '');
             setGroup((await GroupAPI.getGroup(id)).data);
         } catch {
-            navigate(-1);
+            setNotFound(true);
         }
     };
 
@@ -61,6 +63,11 @@ const GroupDashboard = () => {
                         )}
                     </div>
                 </div>
+            )}
+            {loaded && notFound && (
+                <LoadingComponent
+                    text={'This group is not available.'}
+                />
             )}
             {waiting && (
                 <WaitingForTransaction />

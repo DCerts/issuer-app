@@ -24,7 +24,7 @@ $zoomIn: zoomIn linear 0.2s forwards;
     margin: $margin;
     width: $width;
     min-width: $width;
-    height: $height;
+    min-height: $height;
     animation: $zoomIn;
 
     padding: $padding;

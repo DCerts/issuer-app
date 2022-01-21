@@ -19,7 +19,7 @@ const MainFeatureIcon = (props: MainFeatureIconProps) => {
         <div className={styles.container} onClick={() => {
             if (props.to) navigate(props.to);
         }}>
-            {props.id && (
+            {props.id !== undefined && (
                 <div className={styles.id}>{'#'}{props.id}</div>
             )}
             <div className={styles.title}>{props.title}</div>
