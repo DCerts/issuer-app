@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import AccountAPI from '../../apis/Account';
-import Account, { EMPTY } from '../../common/models/Account';
+import Account from '../../common/models/Account';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import AccountInfo from '../../components/AccountInfo';
@@ -11,7 +11,7 @@ import styles from './index.module.scss';
 
 const AccountDashboard = () => {
     const { accountId } = useParams();
-    const [account, setAccount] = useState<Account>(EMPTY);
+    const [account, setAccount] = useState<Account>();
     const [loaded, setLoaded] = useState(false);
     const [waiting, setWaiting] = useState(false);
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const AccountDashboard = () => {
     return (
         <>
             <GoBackButton text={'Back'} />
-            <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
+            <AuthFilter setLoaded={setLoaded} />
             {loaded && account && (
                 <div className={styles.container}>
                     <AccountInfo

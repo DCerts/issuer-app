@@ -18,10 +18,10 @@ class WalletAPI {
         }
     }
 
-    async createGroup(groupId: number, name: string, members: string[], threshold: number) {
+    async createGroup(name: string, members: string[], threshold: number) {
         if (this.contract) {
             const address = await Core.getAddress();
-            await this.contract.methods.addGroup(groupId, name, members, threshold).send({
+            await this.contract.methods.addGroup(name, members, threshold).send({
                 from: address,
                 gas: 1000000
             });
