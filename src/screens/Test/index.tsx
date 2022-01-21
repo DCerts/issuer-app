@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
-import { dashboardRoute } from '../../Routes';
 
 
 const Test = () => {
     const [loaded, setLoaded] = useState(false);
-    const text = 'OK!';
 
     useEffect(() => {
         const test = async () => {
@@ -23,15 +21,12 @@ const Test = () => {
 
     return (
         <>
-            <GoBackButton
-                to={dashboardRoute.path}
-                text={'Dashboard'}
-            />
+            <GoBackButton text={'Back'} />
             <AuthFilter setLoaded={setLoaded} />
             {
                 loaded && (
                     <LoadingComponent
-                        text={text}
+                        text={'OK!'}
                     />
                 )
             }

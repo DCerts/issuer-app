@@ -5,6 +5,9 @@ $boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $hoverBoxShadow: 0 0 30px rgba(0, 0, 0, 0.1);
 $margin: 20px;
 
+$zoomOut: zoomOut linear 0.2s forwards;
+$zoomIn: zoomIn linear 0.2s forwards;
+
 
 .container {
     display: flex;
@@ -23,4 +26,26 @@ $margin: 20px;
     input:hover {
         box-shadow: $hoverBoxShadow;
     }
+
+    input:focus {
+        animation: $zoomOut;
+    }
+
+    input:not(:focus) {
+        animation: $zoomIn;
+    }
+}
+
+@keyframes zoomOut {
+    from {}
+    to {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.05);
+    }
+    to {}
 }

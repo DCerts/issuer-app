@@ -2,6 +2,7 @@ $background: #000;
 $squareSize: 25px;
 $squareColor: rgb(247, 158, 43);
 $squareMargin: 20px;
+$blurSize: 20px;
 
 $zoom: zoom linear 1.5s infinite;
 
@@ -16,6 +17,12 @@ $zoom: zoom linear 1.5s infinite;
     background-color: $background;
     animation: changeOpacity 2.5s linear infinite;
     z-index: 1;
+
+    -webkit-filter: blur($blurSize);
+    -moz-filter: blur($blurSize);
+    -ms-filter: blur($blurSize);
+    -o-filter: blur($blurSize);
+    filter: blur($blurSize);
 
     .pane {
         margin: auto;

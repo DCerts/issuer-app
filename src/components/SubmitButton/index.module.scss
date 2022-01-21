@@ -4,6 +4,9 @@ $buttonBorder: 2px solid #000;
 $buttonPadding: 20px;
 $buttonMargin: 6px;
 
+$buttonBoxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$buttonHoverBoxShadow: 0 0 30px rgba(0, 0, 0, 0.1);
+
 $zoomOut: zoomOut linear 0.2s forwards;
 $zoomIn: zoomIn linear 0.2s forwards;
 $appear: appear linear 0.2s forwards;
@@ -33,12 +36,14 @@ $hiddenTextFontWeight: 500;
         padding: $buttonPadding;
         margin: $buttonMargin;
         animation: $zoomIn;
+        box-shadow: $buttonBoxShadow;
     }
 
     button:hover {
         cursor: pointer;
         z-index: 1;
         animation: $zoomOut;
+        box-shadow: $buttonHoverBoxShadow;
     }
 }
 
