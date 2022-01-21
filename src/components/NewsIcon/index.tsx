@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 import { DatumType, NewsType } from '../../common/models/News';
 import styles from './index.module.scss';
 
@@ -11,6 +12,7 @@ interface NewsIconProps {
     title?: string;
     hoverTitle?: string;
     url?: string;
+    highlight?: boolean;
     onClick?: () => void;
 }
 
@@ -35,12 +37,12 @@ const NewsIcon = (props: NewsIconProps) => {
     };
 
     const getHoverTitle = () => {
-        const hoverTitle = props.hoverTitle || 'Check it now!';
-        return hoverTitle;
+        if (!props.hoverTitle) return 'Check it now!';
+        return props.hoverTitle;
     }
 
     return (
-        <div className={styles.container} onClick={() => {
+        <div className={classNames(styles.container, { [styles.highlight]: props.highlight })} onClick={() => {
             if (props.onClick) props.onClick();
             const url = getUrl();
             if (url) navigate(url);

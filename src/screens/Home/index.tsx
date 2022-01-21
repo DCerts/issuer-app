@@ -29,7 +29,6 @@ const Home = () => {
                                 title={'MetaMask'}
                                 onSuccess={() => navigate(successUrl)}
                                 onFailure={(err) => {
-                                    console.log(err);
                                     setSigning(false);
                                 }}
                                 onClick={() => {

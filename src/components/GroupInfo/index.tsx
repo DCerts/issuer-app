@@ -4,6 +4,7 @@ import Group from '../../common/models/Group';
 import Role from '../../common/models/Role';
 import WalletAPI from '../../web3/WalletAPI';
 import SubmitButton from '../SubmitButton';
+import TextShortCut from '../TextShortCut';
 import styles from './index.module.scss';
 
 
@@ -48,7 +49,16 @@ const GroupInfo = (props: GroupInfoProps) => {
                         {props.group.name}
                     </div>
                     <div className={styles.text}>
-                        {'Threshold: '}{props.group.threshold}
+                        <div>{'Threshold: '}{props.group.threshold}</div>
+                        <div>{'Members: '}{props.group.members.map((memberId, index) => (
+                            <div className={styles.shortcut}>
+                                <TextShortCut
+                                    text={memberId}
+                                    to={`/accounts/${memberId}`}
+                                    key={index}
+                                />
+                            </div>
+                        ))}</div>
                     </div>
                     {!props.group.available && props.role === Role.SCHOOL && (
                         <div className={styles.submit}>

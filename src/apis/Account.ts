@@ -7,9 +7,20 @@ const AccountAPI = {
             `/accounts`
         );
     },
+    getById: async (accountId: string) => {
+        return Base.auth().get<Account>(
+            `/accounts/${accountId}`
+        );
+    },
     getAll: async () => {
         return Base.auth().get<Account[]>(
             `/accounts/all`
+        );
+    },
+    create: async (account: Account) => {
+        return Base.auth().put(
+            `/accounts/${account.id}`,
+            account
         );
     }
 };

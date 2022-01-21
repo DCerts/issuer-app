@@ -45,7 +45,7 @@ const GroupDashboard = () => {
                         onFailure={() => setWaiting(false)}
                         onSubmit={() => setWaiting(true)}
                     />
-                    <>
+                    <div className={styles.pane}>
                         {group.available && group.members.includes(account.id) && (
                             <>
                                 <MainFeatureIcon
@@ -59,7 +59,7 @@ const GroupDashboard = () => {
                                 />
                             </>
                         )}
-                    </>
+                    </div>
                 </div>
             )}
             {waiting && (

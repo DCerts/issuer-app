@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
-import { joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import { allAccountsRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import LogoutButton from '../../components/LogoutButton';
 import styles from './index.module.scss';
 import NewsAPI from '../../apis/News';
@@ -44,6 +44,7 @@ const Dashboard = () => {
                                 <MainFeatureIcon
                                     title={'Members'}
                                     icon={'https://cdn-icons-png.flaticon.com/128/4471/4471010.png'}
+                                    to={allAccountsRoute.path}
                                 />
                             </>
                         )}

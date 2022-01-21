@@ -1,5 +1,8 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+import AccountDashboard from './screens/AccountDashboard';
+import AllAccounts from './screens/AllAccounts';
+import CreateAccount from './screens/CreateAccount';
 import CreateGroup from './screens/CreateGroup';
 import Dashboard from './screens/Dashboard';
 import GroupDashboard from './screens/GroupDashboard';
@@ -24,15 +27,30 @@ export const createGroupRoute = {
     element: <CreateGroup />
 };
 
+export const createAccountRoute = {
+    path: '/accounts/new',
+    element: <CreateAccount />
+};
+
 export const joinedGroupsRoute = {
     path: '/groups',
     element: <JoinedGroups />
 };
 
+export const allAccountsRoute = {
+    path: '/accounts',
+    element: <AllAccounts />
+};
+
 export const groupDashboardRoute = {
     path: '/groups/:groupId',
     element: <GroupDashboard />
-}
+};
+
+export const accountDashboardRoute = {
+    path: '/accounts/:accountId',
+    element: <AccountDashboard />
+};
 
 export const newsfeedRoute = {
     path: '/newsfeed',
@@ -50,9 +68,12 @@ const Routes = () => {
         homeRoute,
         dashboardRoute,
         createGroupRoute,
+        createAccountRoute,
         joinedGroupsRoute,
+        allAccountsRoute,
         newsfeedRoute,
-        groupDashboardRoute
+        groupDashboardRoute,
+        accountDashboardRoute
     ]);
 
     return (

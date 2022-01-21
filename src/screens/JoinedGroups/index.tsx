@@ -40,19 +40,21 @@ const JoinedGroups = () => {
                                 url={createGroupRoute.path}
                             />
                         )}
-                        {(groups.length > 0) && groups.map((group, index) => (
-                            <MainFeatureIcon
-                                id={group.id}
-                                title={group.name}
-                                to={`/groups/${group.id}`}
-                                key={index}
-                            />
-                        ))}
-                        {!groups.length && (
-                            <LoadingComponent
-                                text={'You have not joined any groups yet.'}
-                            />
-                        )}
+                        <div className={styles.pane}>
+                            {(groups.length > 0) && groups.map((group, index) => (
+                                <MainFeatureIcon
+                                    id={group.id}
+                                    title={group.name}
+                                    to={`/groups/${group.id}`}
+                                    key={index}
+                                />
+                            ))}
+                            {!groups.length && (
+                                <LoadingComponent
+                                    text={'You have not joined any groups yet.'}
+                                />
+                            )}
+                        </div>
                     </div>
                 )
             }

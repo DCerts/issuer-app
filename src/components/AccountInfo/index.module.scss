@@ -24,7 +24,7 @@ $zoomIn: zoomIn linear 0.2s forwards;
     margin: $margin;
     width: $width;
     min-width: $width;
-    min-height: $height;
+    height: $height;
     animation: $zoomIn;
 
     padding: $padding;
@@ -59,10 +59,6 @@ $zoomIn: zoomIn linear 0.2s forwards;
     * {
         margin-top: 10px;
     }
-}
-
-.shortcut {
-    margin-left: 10%;
 }
 
 .submit {

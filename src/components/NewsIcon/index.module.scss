@@ -5,6 +5,7 @@ $borderRadius: 10px;
 $boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $width: 600px;
 $height: 80px;
+$highlightBackgroundColor: rgb(172, 255, 197);
 
 $titleFontSize: 22px;
 $titleFontWeight: 500;
@@ -37,6 +38,10 @@ $zoomIn: zoomIn linear 0.2s forwards;
         right: 5%;
         opacity: 20%;
     }
+}
+
+.highlight {
+    background-color: $highlightBackgroundColor;
 }
 
 .title {

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import GroupAPI from '../../apis/Group';
+import AccountAPI from '../../apis/Account';
 import AuthFilter from '../../components/AuthFilter';
-import Group from '../../common/models/Group';
+import Account from '../../common/models/Account';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
-import WalletAPI from '../../web3/WalletAPI';
 import { Role } from '../../common/models';
 import GoBackIcon from '../../components/GoBackIcon';
 import { dashboardRoute } from '../../Routes';
@@ -13,32 +12,26 @@ import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 
 
-const CreateGroup = () => {
+const CreateAccount = () => {
     const navigate = useNavigate();
     const [loaded, setLoaded] = useState(false);
-    const [groupId, setGroupId] = useState<number>(0);
-    const [groupName, setGroupName] = useState<string>('');
-    const [groupThreshold, setGroupThreshold] = useState<number>(0);
-    const [groupMembers, setGroupMembers] = useState<string[]>([]);
+    const [accountId, setAccountId] = useState<string>('');
+    const [accountName, setAccountName] = useState<string>('');
+    const [birthday, setBirthday] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [waiting, setWaiting] = useState(false);
 
-    const createGroup = async () => {
+    const createAccount = async () => {
         try {
             setWaiting(true);
-            if (groupId) {
-                const group: Group = {
-                    id: groupId,
-                    name: groupName,
-                    threshold: groupThreshold,
-                    members: groupMembers
+            if (accountId) {
+                const account: Account = {
+                    id: accountId,
+                    name: accountName,
+                    birthday: birthday,
+                    email: email
                 };
-                await WalletAPI.createGroup(
-                    group.id,
-                    group.name,
-                    group.members,
-                    group.threshold
-                );
-                await GroupAPI.createGroup(group);
+                await AccountAPI.create(account);
                 navigate(-1);
             }
         } catch {
@@ -60,31 +53,25 @@ const CreateGroup = () => {
                         <div className={styles.container}>
                             <SimpleInput
                                 placeholder={'Id'}
-                                onChange={(text) => {
-                                    setGroupId(Number.parseInt(text));
-                                }}
+                                onChange={setAccountId}
                             />
                             <SimpleInput
                                 placeholder={'Name'}
-                                onChange={setGroupName}
+                                onChange={setAccountName}
                             />
                             <SimpleInput
-                                placeholder={'Threshold'}
-                                onChange={(text) => {
-                                    setGroupThreshold(Number.parseInt(text));
-                                }}
+                                placeholder={'Birthday'}
+                                onChange={setBirthday}
                             />
                             <SimpleInput
-                                placeholder={'Members'}
-                                onChange={(text) => {
-                                    setGroupMembers(text.split(','));
-                                }}
+                                placeholder={'Email'}
+                                onChange={setEmail}
                             />
                             <div className={styles.submit}>
                                 <SubmitButton
                                     title={'Create!'}
                                     confirm={true}
-                                    onClick={createGroup}
+                                    onClick={createAccount}
                                 />
                             </div>
                         </div>
@@ -98,4 +85,4 @@ const CreateGroup = () => {
     );
 };
 
-export default CreateGroup;
+export default CreateAccount;
