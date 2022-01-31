@@ -12,14 +12,11 @@ interface ContractJSON {
     };
 }
 
-let contract: Contract;
+class Wallet {
+    private contract: Contract | undefined;
+    private sendingOptions: any;
 
-const Wallet = {
-    /**
-     * Connects to the contract MultiSigWallet.
-     * @returns the contract if connected; otherwise, undefined.
-     */
-    connect: async () => {
+    async connect() {
         const web3 = Core.getWeb3();
         const contractJSON: ContractJSON = {
             abi: MultiSigWallet.abi,
@@ -30,10 +27,21 @@ const Wallet = {
             const abi = contractJSON.abi;
             const address = contractJSON.networks[netId].address;
             console.info(`Wallet: ${address}`);
-            contract = new web3.eth.Contract(abi, address);
-            return contract;
+            this.contract = new web3.eth.Contract(abi, address);
+            this.sendingOptions = {
+                from: await Core.getAddress(),
+                gas: 1000000
+            };
         }
     }
-};
 
-export default Wallet;
+    getContract() {
+        return this.contract;
+    }
+
+    getSendingOptions() {
+        return this.sendingOptions;
+    }
+}
+
+export default new Wallet();

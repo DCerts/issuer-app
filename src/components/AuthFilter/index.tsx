@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AccountAPI from '../../apis/Account';
 import { Account, Role } from '../../common/models';
-import WalletAPI from '../../web3/WalletAPI';
+import WalletAPI from '../../web3/Wallet';
 import LoadingComponent from '../LoadingComponent';
 import { homeRoute } from '../../Routes';
 import Core, { Web3NotEnableError } from '../../web3/Core';
@@ -43,7 +43,7 @@ const AuthFilter = (props: AuthFilterProps) => {
             }
             if (props.setAccount) props.setAccount(account);
             if (props.successUrl) navigate(props.successUrl);
-            await WalletAPI.loadContract();
+            await WalletAPI.connect();
             setAuthorizing(false);
             props.setLoaded(true);
         } catch (err) {

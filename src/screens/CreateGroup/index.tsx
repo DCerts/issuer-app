@@ -3,7 +3,7 @@ import GroupAPI from '../../apis/Group';
 import AuthFilter from '../../components/AuthFilter';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
-import WalletAPI from '../../web3/WalletAPI';
+import Web3Group from '../../web3/Web3Group';
 import { Role } from '../../common/models';
 import GoBackIcon from '../../components/GoBackIcon';
 import { dashboardRoute } from '../../Routes';
@@ -24,7 +24,7 @@ const CreateGroup = () => {
     const createGroup = async () => {
         try {
             setWaiting(true);
-            WalletAPI.createGroup(
+            Web3Group.createGroup(
                 groupName,
                 groupMembers,
                 groupThreshold

@@ -2,7 +2,7 @@ import React from 'react';
 import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
 import Role from '../../common/models/Role';
-import WalletAPI from '../../web3/WalletAPI';
+import Web3Group from '../../web3/Web3Group';
 import SubmitButton from '../SubmitButton';
 import TextShortCut from '../TextShortCut';
 import styles from './index.module.scss';
@@ -21,7 +21,7 @@ const GroupInfo = (props: GroupInfoProps) => {
         try {
             if (props.onSubmit) props.onSubmit();
             await GroupAPI.confirmGroup(props.group.id);
-            WalletAPI.confirmGroup(props.group.id)
+            Web3Group.confirmGroup(props.group.id)
             if (props.onSuccess) props.onSuccess();
         } catch (err) {
             if (props.onFailure) props.onFailure(err);
