@@ -3,7 +3,6 @@ import AccountAPI from '../../apis/Account';
 import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
-import MainFeatureIcon from '../../components/MainFeatureIcon';
 import NewsIcon from '../../components/NewsIcon';
 import { createAccountRoute, dashboardRoute } from '../../Routes';
 import styles from './index.module.scss';
@@ -41,13 +40,12 @@ const AllAccounts = () => {
                                 title={'Create a new account'}
                                 hoverTitle={'Create one now!'}
                                 url={createAccountRoute.path}
-                                highlight={true}
+                                special={true}
                             />
                         )}
                         {(accounts.length > 0) && accounts.map((acc, index) => (
                             <NewsIcon
                                 title={acc.id}
-                                hoverTitle={acc.name || ''}
                                 url={`/accounts/${acc.id}`}
                                 key={index}
                             />

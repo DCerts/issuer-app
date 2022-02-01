@@ -1,5 +1,1 @@
-const JWT_KEY = 'auth:jwt';
-
-export {
-    JWT_KEY
-};
+export const JWT_KEY = 'auth:jwt';

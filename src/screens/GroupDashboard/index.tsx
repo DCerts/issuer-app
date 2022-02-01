@@ -51,10 +51,14 @@ const GroupDashboard = () => {
                         {group.available && group.members.includes(account.id) && (
                             <>
                                 <MainFeatureIcon
-                                    title={'Certificates'}
+                                    title={'Batches'}
+                                    to={`/groups/${groupId}/batches`}
+                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471014.png'}
                                 />
                                 <MainFeatureIcon
-                                    title={'Unknown'}
+                                    title={'Certificates'}
+                                    to={`/groups/${groupId}/certificates`}
+                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471012.png'}
                                 />
                                 <MainFeatureIcon
                                     title={'Unknown'}

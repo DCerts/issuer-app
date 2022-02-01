@@ -12,7 +12,9 @@ interface NewsIconProps {
     title?: string;
     hoverTitle?: string;
     url?: string;
+    special?: boolean;
     highlight?: boolean;
+    warnable?: boolean;
     onClick?: () => void;
 }
 
@@ -37,12 +39,18 @@ const NewsIcon = (props: NewsIconProps) => {
     };
 
     const getHoverTitle = () => {
-        if (!props.hoverTitle) return 'Check it now!';
+        if (!props.hoverTitle) {
+            return props.warnable ? 'Verify now!' : 'Check it now!';
+        }
         return props.hoverTitle;
     }
 
     return (
-        <div className={classNames(styles.container, { [styles.highlight]: props.highlight })} onClick={() => {
+        <div className={classNames(styles.container, {
+            [styles.special]: props.special,
+            [styles.highlight]: props.highlight,
+            [styles.warning]: props.warnable
+        })} onClick={() => {
             if (props.onClick) props.onClick();
             const url = getUrl();
             if (url) navigate(url);

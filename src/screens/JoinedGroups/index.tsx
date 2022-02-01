@@ -47,6 +47,7 @@ const JoinedGroups = () => {
                                     title={group.name}
                                     to={`/groups/${group.id}`}
                                     key={index}
+                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471003.png'}
                                 />
                             ))}
                             {!groups.length && (

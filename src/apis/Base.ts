@@ -21,7 +21,7 @@ class API {
 
     static auth() {
         const token = localStorage.getItem(JWT_KEY);
-        if (!token) return API.noAuth();
+        if (!token) throw new Error();
         return axios.create({
             baseURL: API.BASE_URL,
             headers: {

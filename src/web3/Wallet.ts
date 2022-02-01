@@ -17,6 +17,7 @@ class Wallet {
     private sendingOptions: any;
 
     async connect() {
+        if (this.contract) return;
         const web3 = Core.getWeb3();
         const contractJSON: ContractJSON = {
             abi: MultiSigWallet.abi,

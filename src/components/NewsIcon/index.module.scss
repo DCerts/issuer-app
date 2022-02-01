@@ -6,6 +6,7 @@ $boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $width: 600px;
 $height: 80px;
 $highlightBackgroundColor: rgb(172, 255, 197);
+$warningBackgroundColor: rgb(241, 100, 100);
 
 $titleFontSize: 22px;
 $titleFontWeight: 500;
@@ -31,6 +32,7 @@ $zoomIn: zoomIn linear 0.2s forwards;
 
     background-color: $background;
     box-shadow: $boxShadow;
+    overflow: hidden;
 
     img {
         display: flex;
@@ -40,8 +42,30 @@ $zoomIn: zoomIn linear 0.2s forwards;
     }
 }
 
-.highlight {
+.special {
     background-color: $highlightBackgroundColor;
+}
+
+.highlight::after {
+    content: '';
+    background: $highlightBackgroundColor;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: rotate(-60deg);
+}
+
+.warning::after {
+    content: '';
+    background: $warningBackgroundColor;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: rotate(-60deg);
 }
 
 .title {

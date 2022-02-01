@@ -51,7 +51,7 @@ const GroupInfo = (props: GroupInfoProps) => {
                     <div className={styles.text}>
                         <div>{'Threshold: '}{props.group.threshold}</div>
                         <div>{'Members: '}{props.group.members.map((memberId, index) => (
-                            <div className={styles.shortcut}>
+                            <div className={styles.shortcut} key={index}>
                                 <TextShortCut
                                     text={memberId}
                                     to={`/accounts/${memberId}`}

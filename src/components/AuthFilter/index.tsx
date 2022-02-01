@@ -7,14 +7,18 @@ import WalletAPI from '../../web3/Wallet';
 import LoadingComponent from '../LoadingComponent';
 import { homeRoute } from '../../Routes';
 import Core, { Web3NotEnableError } from '../../web3/Core';
+import GroupAPI from '../../apis/Group';
+import Group from '../../common/models/Group';
 
 
 interface AuthFilterProps {
     setLoaded: (loaded: boolean) => void;
     setAccount?: (account: Account) => void;
+    setGroup?: (group: Group) => void;
     fallbackUrl?: string;
     successUrl?: string;
     role?: Role;
+    group?: number;
 }
 
 const AuthFilter = (props: AuthFilterProps) => {
@@ -40,6 +44,13 @@ const AuthFilter = (props: AuthFilterProps) => {
             const account = (await AccountAPI.get()).data;
             if (props.role !== undefined && account.role !== props.role) {
                 throw new Error();
+            }
+            if (props.group !== undefined) {
+                const group = (await GroupAPI.getGroup(props.group)).data;
+                if (!group.members.includes(account.id)) {
+                    throw new Error();
+                }
+                if (props.setGroup) props.setGroup(group);
             }
             if (props.setAccount) props.setAccount(account);
             if (props.successUrl) navigate(props.successUrl);

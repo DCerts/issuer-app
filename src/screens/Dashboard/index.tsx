@@ -4,9 +4,10 @@ import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
 import { allAccountsRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import LogoutButton from '../../components/LogoutButton';
-import styles from './index.module.scss';
 import NewsAPI from '../../apis/News';
 import { EMPTY } from '../../common/models/Account';
+import styles from './index.module.scss';
+import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/NewsConstants';
 
 
 const Dashboard = () => {
@@ -17,7 +18,9 @@ const Dashboard = () => {
     useEffect(() => {
         const getNews = async () => {
             try {
-                const news = (await NewsAPI.getNews()).data;
+                const groupCreatedNews = (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data;
+                const batchCreatedNews = (await NewsAPI.getNews(BATCH_CREATED_NEWS)).data;
+                const news = [...groupCreatedNews, ...batchCreatedNews];
                 if (news && news.length) setNewsCount(news.length);
             } catch {}
         };

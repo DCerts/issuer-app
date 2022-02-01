@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NewsAPI from '../../apis/News';
 import { DatumType, NewsDatum } from '../../common/models/News';
 import Role from '../../common/models/Role';
+import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/NewsConstants';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
@@ -17,7 +18,9 @@ const Newsfeed = () => {
     useEffect(() => {
         const getNews = async () => {
             try {
-                setNews((await NewsAPI.getNews()).data);
+                const groupCreatedNews = (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data;
+                const batchCreatedNews = (await NewsAPI.getNews(BATCH_CREATED_NEWS)).data;
+                setNews([...groupCreatedNews, ...batchCreatedNews]);
             } catch {}
         };
 

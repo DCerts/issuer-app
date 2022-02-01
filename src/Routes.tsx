@@ -2,7 +2,12 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import AccountDashboard from './screens/AccountDashboard';
 import AllAccounts from './screens/AllAccounts';
+import CertificateDashboard from './screens/CertificateDashboard';
 import CreateAccount from './screens/CreateAccount';
+import CreateBatch from './screens/CreateBatch';
+import CreateCertificate from './screens/CreateCertificate';
+import CreatedBatches from './screens/CreatedBatches';
+import CreatedCertificates from './screens/CreatedCertificates';
 import CreateGroup from './screens/CreateGroup';
 import Dashboard from './screens/Dashboard';
 import GroupDashboard from './screens/GroupDashboard';
@@ -42,14 +47,39 @@ export const allAccountsRoute = {
     element: <AllAccounts />
 };
 
+export const createdBatchesRoute = {
+    path: '/groups/:groupId/batches',
+    element: <CreatedBatches />
+};
+
+export const createdCertificatesRoute = {
+    path: '/groups/:groupId/certificates',
+    element: <CreatedCertificates />
+};
+
 export const groupDashboardRoute = {
     path: '/groups/:groupId',
     element: <GroupDashboard />
 };
 
+export const createBatchRoute = {
+    path: '/groups/:groupId/batches/new',
+    element: <CreateBatch />
+};
+
+export const createCertificateRoute = {
+    path: '/groups/:groupId/certificates/new',
+    element: <CreateCertificate />
+};
+
 export const accountDashboardRoute = {
     path: '/accounts/:accountId',
     element: <AccountDashboard />
+};
+
+export const certificateDashboardRoute = {
+    path: '/groups/:groupId/certificates/:regNo',
+    element: <CertificateDashboard />
 };
 
 export const newsfeedRoute = {
@@ -69,11 +99,16 @@ const Routes = () => {
         dashboardRoute,
         createGroupRoute,
         createAccountRoute,
+        createBatchRoute,
+        createCertificateRoute,
         joinedGroupsRoute,
         allAccountsRoute,
+        createdBatchesRoute,
+        createdCertificatesRoute,
         newsfeedRoute,
         groupDashboardRoute,
-        accountDashboardRoute
+        accountDashboardRoute,
+        certificateDashboardRoute
     ]);
 
     return (
