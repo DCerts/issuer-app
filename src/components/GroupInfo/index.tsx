@@ -1,5 +1,4 @@
 import React from 'react';
-import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
 import Role from '../../common/models/Role';
 import Web3Group from '../../web3/Web3Group';
@@ -20,8 +19,7 @@ const GroupInfo = (props: GroupInfoProps) => {
     const confirmGroup = async () => {
         try {
             if (props.onSubmit) props.onSubmit();
-            await GroupAPI.confirmGroup(props.group.id);
-            Web3Group.confirmGroup(props.group.id)
+            await Web3Group.confirmGroup(props.group.id);
             if (props.onSuccess) props.onSuccess();
         } catch (err) {
             if (props.onFailure) props.onFailure(err);
@@ -31,7 +29,7 @@ const GroupInfo = (props: GroupInfoProps) => {
     const rejectGroup = async () => {
         try {
             if (props.onSubmit) props.onSubmit();
-            await GroupAPI.rejectGroup(props.group.id);
+            await Web3Group.rejectGroup(props.group.id);
             if (props.onSuccess) props.onSuccess();
         } catch (err) {
             if (props.onFailure) props.onFailure(err);

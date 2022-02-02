@@ -34,6 +34,11 @@ const AccountInfo = (props: AccountInfoProps) => {
                                 />
                             )}
                         </div>
+                        <div>
+                            {props.account.birthday && (
+                                <div>{'Date of Birth: '}{props.account.birthday}</div>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

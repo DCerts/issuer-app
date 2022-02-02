@@ -38,7 +38,7 @@ const GroupDashboard = () => {
         <>
             <GoBackButton text={'Back'} />
             <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
-            {loaded && group && (
+            {loaded && !waiting && group && (
                 <div className={styles.container}>
                     <GroupInfo
                         role={account.role}
@@ -74,7 +74,9 @@ const GroupDashboard = () => {
                 />
             )}
             {waiting && (
-                <WaitingForTransaction />
+                <LoadingComponent
+                    text={'Confirmation is being processed...'}
+                />
             )}
         </>
     );

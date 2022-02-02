@@ -2,6 +2,7 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import AccountDashboard from './screens/AccountDashboard';
 import AllAccounts from './screens/AllAccounts';
+import BatchDashboard from './screens/BatchDashboard';
 import CertificateDashboard from './screens/CertificateDashboard';
 import CreateAccount from './screens/CreateAccount';
 import CreateBatch from './screens/CreateBatch';
@@ -82,6 +83,11 @@ export const certificateDashboardRoute = {
     element: <CertificateDashboard />
 };
 
+export const batchDashboardRoute = {
+    path: '/groups/:groupId/batches/:regNo',
+    element: <BatchDashboard />
+};
+
 export const newsfeedRoute = {
     path: '/newsfeed',
     element: <Newsfeed />
@@ -108,7 +114,8 @@ const Routes = () => {
         newsfeedRoute,
         groupDashboardRoute,
         accountDashboardRoute,
-        certificateDashboardRoute
+        certificateDashboardRoute,
+        batchDashboardRoute
     ]);
 
     return (

@@ -8,6 +8,7 @@ interface TextShortCutProps {
     text: string;
     to?: string;
     url?: string;
+    onClick?: () => void;
 }
 
 const TextShortCut = (props: TextShortCutProps) => {
@@ -19,6 +20,7 @@ const TextShortCut = (props: TextShortCutProps) => {
                 <span>{props.header}</span>
             )}
             <span className={styles.text} onClick={() => {
+                if (props.onClick) props.onClick();
                 if (props.to) navigate(props.to);
                 else if (props.url) window.location.href = props.url;
             }}>

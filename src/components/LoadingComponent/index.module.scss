@@ -11,5 +11,13 @@
 
     .text {
         font-size: 200%;
+
+        .clickable {
+            position: absolute;
+            margin-top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
     }
 }

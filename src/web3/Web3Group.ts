@@ -26,6 +26,15 @@ class Web3Group {
                 .send(Wallet.getSendingOptions());
         }
     }
+
+    async rejectGroup(groupId: number) {
+        const contract = Wallet.getContract();
+        if (contract) {
+            await contract.methods
+                .rejectGroup(groupId)
+                .send(Wallet.getSendingOptions());
+        }
+    }
 }
 
 export default new Web3Group();
