@@ -1,0 +1,42 @@
+{
+    "name": "Pets Animal",
+    "source": "https://www.flaticon.com/stickers-pack/hand-drawn-pets-animal-flat-1-of-1",
+    "stickers": [
+        {
+            "name": "Chicken",
+            "sizes": {
+                "128": "https://cdn-icons-png.flaticon.com/128/4470/4470996.png"
+            }
+        },
+        {
+            "name": "Zebra",
+            "sizes": {
+                "128": "https://cdn-icons-png.flaticon.com/128/4471/4471010.png"
+            }
+        },
+        {
+            "name": "Leopard",
+            "sizes": {
+                "128": "https://cdn-icons-png.flaticon.com/128/4471/4471005.png"
+            }
+        },
+        {
+            "name": "Hippo",
+            "sizes": {
+                "128": "https://cdn-icons-png.flaticon.com/128/4471/4471014.png"
+            }
+        },
+        {
+            "name": "Monkey",
+            "sizes": {
+                "128": "https://cdn-icons-png.flaticon.com/128/4471/4471012.png"
+            }
+        },
+        {
+            "name": "Duck",
+            "sizes": {
+                "128": "https://cdn-icons-png.flaticon.com/128/4471/4471003.png"
+            }
+        }
+    ]
+}

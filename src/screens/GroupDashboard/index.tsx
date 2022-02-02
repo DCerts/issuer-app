@@ -9,6 +9,7 @@ import GroupInfo from '../../components/GroupInfo';
 import LoadingComponent from '../../components/LoadingComponent';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
+import PetsAnimalPack from '../../icons/PetsAnimalPack';
 import styles from './index.module.scss';
 
 
@@ -53,12 +54,12 @@ const GroupDashboard = () => {
                                 <MainFeatureIcon
                                     title={'Batches'}
                                     to={`/groups/${groupId}/batches`}
-                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471014.png'}
+                                    icon={PetsAnimalPack.getIcon('Hippo')}
                                 />
                                 <MainFeatureIcon
                                     title={'Certificates'}
                                     to={`/groups/${groupId}/certificates`}
-                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471012.png'}
+                                    icon={PetsAnimalPack.getIcon('Monkey')}
                                 />
                                 <MainFeatureIcon
                                     title={'Unknown'}

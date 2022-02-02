@@ -8,6 +8,7 @@ import NewsAPI from '../../apis/News';
 import { EMPTY } from '../../common/models/Account';
 import styles from './index.module.scss';
 import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/NewsConstants';
+import PetsAnimalPack from '../../icons/PetsAnimalPack';
 
 
 const Dashboard = () => {
@@ -39,21 +40,21 @@ const Dashboard = () => {
                             <>
                                 <MainFeatureIcon
                                     title={'Newsfeed'}
-                                    icon={'https://cdn-icons-png.flaticon.com/128/4470/4470996.png'}
+                                    icon={PetsAnimalPack.getIcon('Chicken')}
                                     descriptions={[]}
                                     to={newsfeedRoute.path}
                                     notificationCount={newsCount}
                                 />
                                 <MainFeatureIcon
                                     title={'Members'}
-                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471010.png'}
+                                    icon={PetsAnimalPack.getIcon('Zebra')}
                                     to={allAccountsRoute.path}
                                 />
                             </>
                         )}
                         <MainFeatureIcon
                             title={'Groups'}
-                            icon={'https://cdn-icons-png.flaticon.com/128/4471/4471005.png'}
+                            icon={PetsAnimalPack.getIcon('Leopard')}
                             to={joinedGroupsRoute.path}
                         />
                         <MainFeatureIcon

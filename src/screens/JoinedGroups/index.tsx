@@ -7,6 +7,7 @@ import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import NewsIcon from '../../components/NewsIcon';
+import PetsAnimalPack from '../../icons/PetsAnimalPack';
 import { createGroupRoute } from '../../Routes';
 import styles from './index.module.scss';
 
@@ -47,7 +48,7 @@ const JoinedGroups = () => {
                                     title={group.name}
                                     to={`/groups/${group.id}`}
                                     key={index}
-                                    icon={'https://cdn-icons-png.flaticon.com/128/4471/4471003.png'}
+                                    icon={PetsAnimalPack.getRandomIcon()}
                                 />
                             ))}
                             {!groups.length && (
