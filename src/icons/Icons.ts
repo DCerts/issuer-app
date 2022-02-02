@@ -1,3 +1,4 @@
+import path from "path/posix";
 
 
 export interface IconSizes {
@@ -44,5 +45,17 @@ export default class Icons {
             return icon.sizes[size];
         }
         return icon.sizes[Icons.DEFAULT_SIZE];
+    }
+
+    getIndexedIcon(index: number, size?: string) {
+        for (const pack of this.packs) {
+            const icon = pack.stickers[index % pack.stickers.length];
+            if (icon) {
+                if (size) {
+                    return icon.sizes[size];
+                }
+                return icon.sizes[Icons.DEFAULT_SIZE];
+            }
+        }
     }
 }

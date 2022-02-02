@@ -48,7 +48,7 @@ const JoinedGroups = () => {
                                     title={group.name}
                                     to={`/groups/${group.id}`}
                                     key={index}
-                                    icon={PetsAnimalPack.getRandomIcon()}
+                                    icon={PetsAnimalPack.getIndexedIcon(index)}
                                 />
                             ))}
                             {!groups.length && (
