@@ -24,7 +24,7 @@ const GroupDashboard = () => {
 
     const fetchGroup = async () => {
         try {
-            const id = Number.parseInt(groupId || '');
+            const id = Number.parseInt(`${groupId}`);
             setGroup((await GroupAPI.getGroup(id)).data);
         } catch {
             setNotFound(true);

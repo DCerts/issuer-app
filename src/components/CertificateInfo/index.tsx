@@ -1,5 +1,6 @@
 import React from 'react';
 import Certificate from '../../common/models/Certificate';
+import TextShortCut from '../TextShortCut';
 import styles from './index.module.scss';
 
 
@@ -21,7 +22,12 @@ const CertificateInfo = (props: CertificateInfoProps) => {
                         {props.certificate.regNo}
                     </div>
                     <div className={styles.text}>
-                        <div>{'Batch: '}{props.certificate.batchRegNo}</div>
+                        <div>{'Batch: '}{props.certificate.batchRegNo && (
+                            <TextShortCut
+                                text={props.certificate.batchRegNo}
+                                to={`/batches/${props.certificate.batchRegNo}`}
+                            />
+                        )}</div>
                         <div>{'Conferred On: '}{props.certificate.conferredOn}</div>
                         <div>{'Date of Birth: '}{props.certificate.dateOfBirth}</div>
                         <div>{'Year of Graduation: '}{props.certificate.yearOfGraduation}</div>

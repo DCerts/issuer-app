@@ -34,7 +34,7 @@ const CreatedBatches = () => {
             <AuthFilter
                 setLoaded={setLoaded}
                 setGroup={setGroup}
-                group={Number.parseInt(groupId || '')}
+                group={Number.parseInt(`${groupId}`)}
             />
             {
                 loaded && (

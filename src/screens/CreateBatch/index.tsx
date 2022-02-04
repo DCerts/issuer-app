@@ -28,7 +28,7 @@ const CreateBatch = () => {
         try {
             setWaiting(true);
             if (regNo) {
-                const group = Number.parseInt(groupId || '');
+                const group = Number.parseInt(`${groupId}`);
                 certificates.forEach(certificate => {
                     certificate.group = group;
                     certificate.batchRegNo = regNo;
