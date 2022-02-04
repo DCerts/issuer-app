@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AccountAPI from '../../apis/Account';
 import { Account, Role } from '../../common/models';
@@ -9,6 +9,7 @@ import { homeRoute } from '../../Routes';
 import Core, { Web3NotEnableError } from '../../web3/Core';
 import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
+import { REDIRECT_TO_QUERY } from '../../common/RouteConstants';
 
 
 interface AuthFilterProps {
@@ -25,7 +26,13 @@ const AuthFilter = (props: AuthFilterProps) => {
     const [authorizing, setAuthorizing] = useState(true);
     const [isWeb3Enable, setIsWeb3Enable] = useState(true);
     const navigate = useNavigate();
-    const homeUrl = homeRoute.path;
+    const location = useLocation();
+    const homeUrl = homeRoute.path.concat(
+        `?${REDIRECT_TO_QUERY}=${
+            encodeURIComponent(location.pathname + location.search)
+        }`
+    );
+    const isHome = location.pathname === homeRoute.path;
     const web3NotEnableText = 'You should consider using MetaMask.';
 
     const enableWeb3 = async () => {
@@ -59,6 +66,7 @@ const AuthFilter = (props: AuthFilterProps) => {
             props.setLoaded(true);
         } catch (err) {
             props.setLoaded(false);
+            if (isHome) return; // No need to redirect when being on home page
             if (axios.isAxiosError(err)) { // Unauthorized
                 navigate(homeUrl);
             }

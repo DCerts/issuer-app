@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 
@@ -13,7 +13,12 @@ interface MainFeatureIconProps {
 }
 
 const MainFeatureIcon = (props: MainFeatureIconProps) => {
+    const [icon, setIcon] = useState<string>();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setIcon(props.icon);
+    }, [props.icon]);
 
     return (
         <div className={styles.container} onClick={() => {
@@ -23,8 +28,10 @@ const MainFeatureIcon = (props: MainFeatureIconProps) => {
                 <div className={styles.id}>{'#'}{props.id}</div>
             )}
             <div className={styles.title}>{props.title}</div>
-            {props.icon && (
-                <img src={props.icon} />
+            {icon && (
+                <img src={props.icon} onError={() => {
+                    setIcon(undefined);
+                }} />
             )}
             {props.descriptions && (
                 <div className={styles.descriptions}>

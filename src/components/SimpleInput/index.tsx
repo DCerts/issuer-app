@@ -6,7 +6,9 @@ interface SimpleInputProps {
     placeholder: string;
     value?: string;
     type?: string;
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
+    onFocus?: () => void;
+    onBlur?: () => void;
 }
 
 const SimpleInput = (props: SimpleInputProps) => {
@@ -16,7 +18,15 @@ const SimpleInput = (props: SimpleInputProps) => {
                 type={props.type}
                 placeholder={props.placeholder}
                 value={props.value}
-                onChange={(e) => props.onChange(e.target.value)}
+                onChange={(e) => {
+                    if (props.onChange) props.onChange(e.target.value);
+                }}
+                onFocus={(e) => {
+                    if (props.onFocus) props.onFocus();
+                }}
+                onBlur={(e) => {
+                    if (props.onBlur) props.onBlur();
+                }}
             />
         </div>
     );
