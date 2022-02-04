@@ -21,6 +21,7 @@ const CertificateInfo = (props: CertificateInfoProps) => {
                         {props.certificate.regNo}
                     </div>
                     <div className={styles.text}>
+                        <div>{'Batch: '}{props.certificate.batchRegNo}</div>
                         <div>{'Conferred On: '}{props.certificate.conferredOn}</div>
                         <div>{'Date of Birth: '}{props.certificate.dateOfBirth}</div>
                         <div>{'Year of Graduation: '}{props.certificate.yearOfGraduation}</div>
@@ -29,7 +30,9 @@ const CertificateInfo = (props: CertificateInfoProps) => {
                         <div>{'Degree Classification: '}{props.certificate.degreeClassification}</div>
                         <div>{'Mode of Study: '}{props.certificate.modeOfStudy}</div>
                         <div>{'Created In: '}{props.certificate.createdIn}</div>
-                        <div>{'Created At: '}{props.certificate.createdAt}</div>
+                        {props.certificate.createdAt && (
+                            <div>{'Created At: '}{props.certificate.createdAt}</div>
+                        )}
                     </div>
                 </div>
             )}

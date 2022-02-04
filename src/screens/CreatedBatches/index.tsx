@@ -51,7 +51,7 @@ const CreatedBatches = () => {
                                     highlight={batch.issued}
                                     warnable={!batch.issued}
                                     title={batch.regNo}
-                                    url={`/groups/${groupId}/batches/${batch.regNo}`}
+                                    url={`/batches/${batch.regNo}`}
                                     key={index}
                                 />
                             )

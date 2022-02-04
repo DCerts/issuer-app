@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { dashboardRoute } from '../../Routes';
 import styles from './index.module.scss';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
-import { REDIRECT_TO_QUERY } from '../../common/RouteConstants';
+import { REDIRECT_TO_QUERY } from '../../common/constants/RouteConstants';
 
 
 const Home = () => {

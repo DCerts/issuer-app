@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthAPI from '../../apis/Auth';
-import { JWT_KEY } from '../../common/AuthConstants';
+import { JWT_KEY } from '../../common/constants/AuthConstants';
 import { homeRoute } from '../../Routes';
 import GoBackButton from '../GoBackIcon';
 

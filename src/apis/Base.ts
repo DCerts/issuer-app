@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
-import { JWT_KEY } from '../common/AuthConstants';
+import { JWT_KEY } from '../common/constants/AuthConstants';
 
 
 dotenv.config();

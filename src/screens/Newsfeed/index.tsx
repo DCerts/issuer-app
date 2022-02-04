@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NewsAPI from '../../apis/News';
 import { DatumType, NewsDatum } from '../../common/models/News';
 import Role from '../../common/models/Role';
-import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/NewsConstants';
+import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/constants/NewsConstants';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';

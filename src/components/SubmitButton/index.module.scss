@@ -18,6 +18,7 @@ $submitWidth: 150px;
 $submitFontSize: 20px;
 $submitFontColor: #000;
 $submitBorderRadius: 10px;
+$submitMargin: 50px;
 
 $hiddenTextRight: 70px;
 $hiddenTextTop: 20px;
@@ -74,6 +75,8 @@ $hiddenTextFontWeight: 500;
     background-color: $confirmColor;
     font-size: $submitFontSize;
     border-radius: $submitBorderRadius;
+    margin-top: $submitMargin;
+    margin-bottom: $submitMargin;
 
     .text {
         line-height: 0%;

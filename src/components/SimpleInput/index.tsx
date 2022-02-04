@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './index.module.scss';
 
 
@@ -6,18 +6,24 @@ interface SimpleInputProps {
     placeholder: string;
     value?: string;
     type?: string;
-    onChange?: (value: string) => void;
+    accept?: string[];
+    onChange?: (value: any) => void;
     onFocus?: () => void;
     onBlur?: () => void;
 }
 
 const SimpleInput = (props: SimpleInputProps) => {
+    const isFile = props.type === 'file';
+
+    const fileInput = useRef<HTMLInputElement>(null);
+
     return (
         <div className={styles.container}>
             <input
-                type={props.type}
+                className={isFile ? styles.pointer : ''}
+                type={'text'}
                 placeholder={props.placeholder}
-                value={props.value}
+                value={isFile ? props.placeholder : props.value}
                 onChange={(e) => {
                     if (props.onChange) props.onChange(e.target.value);
                 }}
@@ -26,6 +32,23 @@ const SimpleInput = (props: SimpleInputProps) => {
                 }}
                 onBlur={(e) => {
                     if (props.onBlur) props.onBlur();
+                }}
+                readOnly={isFile}
+                onClick={(e) => {
+                    if (isFile) {
+                        fileInput.current!.click();
+                        (e.target as HTMLInputElement).blur();
+                    }
+                }}
+            />
+            <input
+                ref={fileInput}
+                type={'file'}
+                accept={props.accept ? props.accept.join(',') : undefined}
+                multiple={true}
+                hidden={true}
+                onChange={(e) => {
+                    if (props.onChange) props.onChange(e.target.files);
                 }}
             />
         </div>

@@ -35,6 +35,9 @@ const NewsIcon = (props: NewsIconProps) => {
         if (props.type === NewsType.GROUP_CREATED) {
             return `/groups/${props.datum}`;
         }
+        if (props.type === NewsType.BATCH_CREATED) {
+            return `/batches/${props.datum}`;
+        }
         return props.url;
     };
 

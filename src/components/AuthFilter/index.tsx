@@ -9,7 +9,7 @@ import { homeRoute } from '../../Routes';
 import Core, { Web3NotEnableError } from '../../web3/Core';
 import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
-import { REDIRECT_TO_QUERY } from '../../common/RouteConstants';
+import { REDIRECT_TO_QUERY } from '../../common/constants/RouteConstants';
 
 
 interface AuthFilterProps {

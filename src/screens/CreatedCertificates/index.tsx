@@ -51,7 +51,7 @@ const CreatedCertificatees = () => {
                             .map((certificate, index) => (
                                 <NewsIcon
                                     title={certificate.regNo}
-                                    url={`/groups/${groupId}/certificates/${certificate.regNo}`}
+                                    url={`/certificates/${certificate.regNo}`}
                                     key={index}
                                 />
                             )

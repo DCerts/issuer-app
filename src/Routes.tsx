@@ -79,12 +79,12 @@ export const accountDashboardRoute = {
 };
 
 export const certificateDashboardRoute = {
-    path: '/groups/:groupId/certificates/:regNo',
+    path: '/certificates/:regNo',
     element: <CertificateDashboard />
 };
 
 export const batchDashboardRoute = {
-    path: '/groups/:groupId/batches/:regNo',
+    path: '/batches/:regNo',
     element: <BatchDashboard />
 };
 

@@ -7,9 +7,9 @@ $blurSize: 20px;
 $zoom: zoom linear 1.5s infinite;
 
 
-.container {
+.blur {
     display: flex;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     top: 0;
@@ -23,20 +23,22 @@ $zoom: zoom linear 1.5s infinite;
     -ms-filter: blur($blurSize);
     -o-filter: blur($blurSize);
     filter: blur($blurSize);
+}
+
+.container {
+    display: flex;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    align-items: center;
+    z-index: 1;
+    overflow: hidden;
 
     .pane {
         margin: auto;
         position: relative;
         flex-wrap: nowrap;
-
-        .square {
-            margin: $squareMargin;
-            width: $squareSize;
-            height: $squareSize;
-            border-radius: 50%;
-            background-color: $squareColor;
-            animation: $zoom;
-        }
     }
 }
 

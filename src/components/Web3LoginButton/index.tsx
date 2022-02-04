@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../../apis/Auth';
-import { JWT_KEY } from '../../common/AuthConstants';
+import { JWT_KEY } from '../../common/constants/AuthConstants';
 import Core from '../../web3/Core';
 import styles from './index.module.scss';
 

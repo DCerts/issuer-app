@@ -3,17 +3,20 @@ import { useParams } from 'react-router-dom';
 import BatchAPI from '../../apis/Batch';
 import Account, { EMPTY } from '../../common/models/Account';
 import Batch from '../../common/models/Batch';
+import Certificate from '../../common/models/Certificate';
 import AuthFilter from '../../components/AuthFilter';
+import CertificateInfo from '../../components/CertificateInfo';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
-import MainFeatureIcon from '../../components/MainFeatureIcon';
+import NewsIcon from '../../components/NewsIcon';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import styles from './index.module.scss';
 
 
 const BatchDashboard = () => {
-    const { groupId, regNo } = useParams();
+    const { regNo } = useParams();
     const [batch, setBatch] = useState<Batch>();
+    const [seekingCertificate, setSeekingCertificate] = useState<Certificate>();
     const [account, setAccount] = useState<Account>(EMPTY);
     const [loaded, setLoaded] = useState(false);
     const [waiting, setWaiting] = useState(false);
@@ -30,7 +33,7 @@ const BatchDashboard = () => {
 
     useEffect(() => {
         if (loaded) fetchBatch();
-    }, [loaded, groupId, regNo]);
+    }, [loaded, regNo]);
 
     return (
         <>
@@ -38,21 +41,28 @@ const BatchDashboard = () => {
             <AuthFilter
                 setLoaded={setLoaded}
                 setAccount={setAccount}
-                group={Number.parseInt(groupId || '')}
             />
             {loaded && batch && (
                 <div className={styles.container}>
-                    {}
-                    <div className={styles.pane}>
-                        {true && (
-                            <>
-                                <MainFeatureIcon
-                                    title={'Unknown'}
-                                />
-                            </>
-                        )}
-                    </div>
+                    {batch.certificates.length > 0 && (
+                        batch.certificates.map((certificate, index) => (
+                            <NewsIcon
+                                title={certificate.regNo}
+                                hoverTitle={'View details!'}
+                                key={index}
+                                onClick={() => setSeekingCertificate(certificate)}
+                            />
+                        ))
+                    )}
+                    {batch.group && (
+                        <></>
+                    )}
                 </div>
+            )}
+            {seekingCertificate && (
+                <WaitingForTransaction onClick={() => setSeekingCertificate(undefined)}>
+                    <CertificateInfo certificate={seekingCertificate} />
+                </WaitingForTransaction>
             )}
             {loaded && notFound && (
                 <LoadingComponent

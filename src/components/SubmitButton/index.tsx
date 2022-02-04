@@ -9,6 +9,11 @@ interface SubmitButtonProps {
 }
 
 const SubmitButton = (props: SubmitButtonProps) => {
+    const getButtonStyle = () => {
+        if (props.title) return styles.submit;
+        return props.confirm ? styles.confirm : styles.reject;
+    };
+
     return (
         <div className={styles.container}>
             {!props.title && (
@@ -17,11 +22,7 @@ const SubmitButton = (props: SubmitButtonProps) => {
                 </div>
             )}
             <button
-                className={
-                    props.title ? styles.submit : (
-                        props.confirm ? styles.confirm : styles.reject
-                    )
-                }
+                className={getButtonStyle()}
                 onClick={props.onClick}
             >
                 {props.title && (

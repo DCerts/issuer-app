@@ -4,6 +4,7 @@ import DropDownMenu from '../../components/DropDownMenu';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import SimpleInput from '../../components/SimpleInput';
+import SubmitButton from '../../components/SubmitButton';
 import styles from './index.module.scss';
 
 
@@ -51,6 +52,10 @@ const Test = () => {
                         />
                         <SimpleInput
                             placeholder={'Type something'}
+                        />
+                        <SubmitButton
+                            title={'Submit!'}
+                            onClick={console.log}
                         />
                     </div>
                 )

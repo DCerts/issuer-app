@@ -3,6 +3,7 @@ $padding: 20px;
 $borderRadius: 10px;
 $boxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $hoverBoxShadow: 0 0 30px rgba(0, 0, 0, 0.1);
+$pointerBackgroundColor: rgb(160, 248, 186);
 $margin: 20px;
 
 $zoomOut: zoomOut linear 0.2s forwards;
@@ -34,6 +35,11 @@ $zoomIn: zoomIn linear 0.2s forwards;
     input:not(:focus) {
         animation: $zoomIn;
     }
+}
+
+.pointer {
+    cursor: pointer;
+    background: $pointerBackgroundColor;
 }
 
 @keyframes zoomOut {

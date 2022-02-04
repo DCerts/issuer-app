@@ -7,7 +7,7 @@ import LogoutButton from '../../components/LogoutButton';
 import NewsAPI from '../../apis/News';
 import { EMPTY } from '../../common/models/Account';
 import styles from './index.module.scss';
-import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/NewsConstants';
+import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/constants/NewsConstants';
 import PetsAnimalPack from '../../icons/PetsAnimalPack';
 
 
