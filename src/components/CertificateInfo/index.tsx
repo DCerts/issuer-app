@@ -22,12 +22,15 @@ const CertificateInfo = (props: CertificateInfoProps) => {
                         {props.certificate.regNo}
                     </div>
                     <div className={styles.text}>
-                        <div>{'Batch: '}{props.certificate.batchRegNo && (
-                            <TextShortCut
-                                text={props.certificate.batchRegNo}
-                                to={`/batches/${props.certificate.batchRegNo}`}
-                            />
-                        )}</div>
+                        {props.certificate.batchRegNo && (
+                                <>
+                                    {'Batch: '}
+                                    <TextShortCut
+                                        text={props.certificate.batchRegNo}
+                                        to={`/batches/${props.certificate.batchRegNo}`}
+                                    />
+                                </>
+                        )}
                         <div>{'Conferred On: '}{props.certificate.conferredOn}</div>
                         <div>{'Date of Birth: '}{props.certificate.dateOfBirth}</div>
                         <div>{'Year of Graduation: '}{props.certificate.yearOfGraduation}</div>

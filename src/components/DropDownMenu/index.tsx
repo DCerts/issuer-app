@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useState } from 'react';
 import styles from './index.module.scss';
 
@@ -10,6 +11,7 @@ interface DropDownMenuProps {
 
 const DropDownMenu = (props: DropDownMenuProps) => {
     const [options, setOptions] = useState(props.options);
+    const [selectedOption, setSelectedOption] = useState<string>();
     const [inputElement, setInputElement] = useState<HTMLInputElement>();
     const [focused, setFocused] = useState(false);
     const focusDelay = 200;
@@ -59,8 +61,11 @@ const DropDownMenu = (props: DropDownMenuProps) => {
                     <div className={styles.options}>
                         {options.map((option, index) => (
                             <div
-                                className={styles.option}
+                                className={
+                                    classNames(styles.option, { [styles.selected]: option === selectedOption })
+                                }
                                 onClick={() => {
+                                    setSelectedOption(option);
                                     if (props.onOptionChanged) {
                                         props.onOptionChanged(option);
                                     }

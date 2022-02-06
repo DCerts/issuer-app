@@ -1,5 +1,6 @@
 $optionBackgroundColor: #fff;
 $optionHoverBackgroundColor: #9cf885;
+$selectedOptionBackgroundColor: #60d4f7;
 $fontSize: 18px;
 $padding: 20px;
 $borderRadius: 10px;
@@ -70,6 +71,10 @@ $zoomIn: zoomIn linear 0.2s forwards;
                 background: $optionHoverBackgroundColor;
                 animation: $zoomOut;
             }
+        }
+
+        .selected {
+            background: $selectedOptionBackgroundColor;
         }
     }
 }

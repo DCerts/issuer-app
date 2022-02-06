@@ -63,7 +63,6 @@ const CreateGroup = () => {
                         <div className={styles.submit}>
                             <SubmitButton
                                 title={'Create!'}
-                                confirm={true}
                                 onClick={createGroup}
                             />
                         </div>

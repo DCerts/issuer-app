@@ -70,7 +70,6 @@ const CreateAccount = () => {
                             <div className={styles.submit}>
                                 <SubmitButton
                                     title={'Create!'}
-                                    confirm={true}
                                     onClick={createAccount}
                                 />
                             </div>

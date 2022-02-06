@@ -125,7 +125,6 @@ const CreateCertificate = () => {
                         <div className={styles.submit}>
                             <SubmitButton
                                 title={'Create!'}
-                                confirm={true}
                                 onClick={createCertificate}
                             />
                         </div>

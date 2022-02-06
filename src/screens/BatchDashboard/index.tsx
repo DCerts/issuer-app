@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BatchAPI from '../../apis/Batch';
 import Account, { EMPTY } from '../../common/models/Account';
 import Batch from '../../common/models/Batch';
 import Certificate from '../../common/models/Certificate';
 import AuthFilter from '../../components/AuthFilter';
+import BatchInfo from '../../components/BatchInfo';
 import CertificateInfo from '../../components/CertificateInfo';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
@@ -21,6 +22,7 @@ const BatchDashboard = () => {
     const [loaded, setLoaded] = useState(false);
     const [waiting, setWaiting] = useState(false);
     const [notFound, setNotFound] = useState(false);
+    const navigate = useNavigate();
 
     const fetchBatch = async () => {
         try {
@@ -42,8 +44,15 @@ const BatchDashboard = () => {
                 setLoaded={setLoaded}
                 setAccount={setAccount}
             />
-            {loaded && batch && (
+            {loaded && !waiting && batch && (
                 <div className={styles.container}>
+                    <BatchInfo
+                        batch={batch}
+                        groups={account.groups || []}
+                        onSuccess={() => navigate(-1)}
+                        onFailure={() => setWaiting(false)}
+                        onSubmit={() => setWaiting(true)}
+                    />
                     {batch.certificates.length > 0 && (
                         batch.certificates.map((certificate, index) => (
                             <NewsIcon
@@ -54,12 +63,9 @@ const BatchDashboard = () => {
                             />
                         ))
                     )}
-                    {batch.group && (
-                        <></>
-                    )}
                 </div>
             )}
-            {seekingCertificate && (
+            {!waiting && seekingCertificate && (
                 <WaitingForTransaction onClick={() => setSeekingCertificate(undefined)}>
                     <CertificateInfo certificate={seekingCertificate} />
                 </WaitingForTransaction>
@@ -70,7 +76,9 @@ const BatchDashboard = () => {
                 />
             )}
             {waiting && (
-                <WaitingForTransaction />
+                <LoadingComponent
+                    text={'Confirmation is being processed...'}
+                />
             )}
         </>
     );

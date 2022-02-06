@@ -2,7 +2,7 @@ import React from 'react';
 import Group from '../../common/models/Group';
 import Role from '../../common/models/Role';
 import Web3Group from '../../web3/Web3Group';
-import SubmitButton from '../SubmitButton';
+import ConfirmationPane from '../ConfirmationPane';
 import TextShortCut from '../TextShortCut';
 import styles from './index.module.scss';
 
@@ -60,13 +60,9 @@ const GroupInfo = (props: GroupInfoProps) => {
                     </div>
                     {!props.group.available && props.role === Role.SCHOOL && (
                         <div className={styles.submit}>
-                            <SubmitButton
-                                confirm={true}
-                                onClick={confirmGroup}
-                            />
-                            <SubmitButton
-                                confirm={false}
-                                onClick={rejectGroup}
+                            <ConfirmationPane
+                                onConfirm={confirmGroup}
+                                onReject={rejectGroup}
                             />
                         </div>
                     )}

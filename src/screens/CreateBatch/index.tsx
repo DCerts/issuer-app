@@ -86,20 +86,21 @@ const CreateBatch = () => {
                                 accept={['.csv']}
                                 onChange={handleUploadedFiles}
                             />
-                            {uploaded && (certificates.length > 0) && (
-                                certificates.map((certificate, index) => (
-                                    <NewsIcon
-                                        title={certificate.regNo}
-                                        hoverTitle={'View details!'}
-                                        key={index}
-                                        onClick={() => setSeekingCertificate(certificate)}
-                                    />
-                                ))
-                            )}
+                            <div className={styles.pane}>
+                                {uploaded && (certificates.length > 0) && (
+                                    certificates.map((certificate, index) => (
+                                        <NewsIcon
+                                            title={certificate.regNo}
+                                            hoverTitle={'View details!'}
+                                            key={index}
+                                            onClick={() => setSeekingCertificate(certificate)}
+                                        />
+                                    ))
+                                )}
+                            </div>
                             <div className={styles.submit}>
                                 <SubmitButton
                                     title={'Submit!'}
-                                    confirm={true}
                                     onClick={createBatch}
                                 />
                             </div>
