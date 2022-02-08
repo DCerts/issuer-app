@@ -31,7 +31,7 @@ class Wallet {
             this.contract = new web3.eth.Contract(abi, address);
             this.sendingOptions = {
                 from: await Core.getAddress(),
-                gas: 1000000
+                gas: 8000000
             };
         }
     }

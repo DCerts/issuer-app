@@ -13,7 +13,7 @@ const CertificateInfo = (props: CertificateInfoProps) => {
         <>
             {props.certificate && (
                 <div className={styles.container}>
-                    {props.certificate.onChainId && (
+                    {props.certificate.onChainId != undefined && (
                         <div className={styles.id}>
                             {'#'}{props.certificate.onChainId}
                         </div>

@@ -13,26 +13,27 @@ class Web3Batch {
     async createBatch(batch: Batch) {
         const contract = Wallet.getContract();
         if (contract) {
+            const certificates = batch.certificates.map(certificate => {
+                return [
+                    0,
+                    '0x0000000000000000000000000000000000000000',
+                    certificate.regNo,
+                    0,
+                    certificate.batchRegNo,
+                    certificate.conferredOn,
+                    certificate.dateOfBirth,
+                    `${certificate.yearOfGraduation}`,
+                    certificate.majorIn,
+                    certificate.degreeOf,
+                    certificate.degreeClassification,
+                    certificate.modeOfStudy,
+                    certificate.createdIn,
+                    certificate.createdAt,
+                    []
+                ];
+            });
             await contract.methods
-                .submitBatch(batch.group, batch.regNo, batch.certificates.map(certificate => {
-                    return {
-                        id: 0,
-                        schoolId: '0x0000000000000000000000000000000000000000',
-                        regNo: certificate.regNo,
-                        batchId: 0,
-                        batchRegNo: certificate.batchRegNo,
-                        conferredOn: certificate.conferredOn,
-                        dateOfBirth: certificate.dateOfBirth,
-                        yearOfGraduation: certificate.yearOfGraduation,
-                        majorIn: certificate.majorIn,
-                        degreeOf: certificate.degreeOf,
-                        degreeClassification: certificate.degreeClassification,
-                        modeOfStudy: certificate.modeOfStudy,
-                        createdIn: certificate.createdIn,
-                        createdAt: certificate.createdAt,
-                        issuers: []
-                    };
-                }))
+                .submitBatch(batch.group, batch.regNo, certificates)
                 .send(Wallet.getSendingOptions());
         }
     }

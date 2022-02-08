@@ -5,6 +5,7 @@ import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
+import Wallet from '../../web3/Wallet';
 import styles from './index.module.scss';
 
 
@@ -14,7 +15,12 @@ const Test = () => {
     useEffect(() => {
         const test = async () => {
             try {
-                console.log('Hello World!');
+                const contract = await Wallet.getContract();
+                if (contract) {
+                    console.log(await contract.methods.isGroupConfirmed(
+                        0
+                    ).call());
+                }
             } catch (err) {
                 console.log(err);
             }
