@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 import LoadingComponent from '../../components/LoadingComponent';
 import LogoutButton from '../../components/LogoutButton';
 import NavigationBar from '../../components/NavigationBar';
-import { allAccountsRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 
 
 const AccountDashboard = () => {
@@ -36,7 +36,7 @@ const AccountDashboard = () => {
         <>
             <LogoutButton />
             <NavigationBar
-                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute, allAccountsRoute]}
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
             />
             <AuthFilter setLoaded={setLoaded} />
             {loaded && account && (

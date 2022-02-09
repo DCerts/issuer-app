@@ -5,7 +5,7 @@ import AuthFilter from '../../components/AuthFilter';
 import LogoutButton from '../../components/LogoutButton';
 import NavigationBar from '../../components/NavigationBar';
 import NewsIcon from '../../components/NewsIcon';
-import { allAccountsRoute, createAccountRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import { createAccountRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
@@ -28,7 +28,7 @@ const AllAccounts = () => {
         <>
             <LogoutButton />
             <NavigationBar
-                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute, allAccountsRoute]}
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
             />
             <AuthFilter
                 setLoaded={setLoaded}

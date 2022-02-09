@@ -67,7 +67,13 @@ const BatchInfo = (props: BatchInfoProps) => {
                         {props.batch.regNo}
                     </div>
                     <div className={styles.text}>
-                        <div>{'Group: '}{props.batch.group}</div>
+                        <>
+                            {'Group: '}
+                            <TextShortCut
+                                text={`${props.batch.group}`}
+                                to={`/groups/${props.batch.group}`}
+                            />
+                        </>
                         <div>{'Total Certificates: '}{props.batch.certificates.length}</div>
                         {props.batch.creator && (
                             <div>
