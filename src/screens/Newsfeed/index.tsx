@@ -24,6 +24,8 @@ const Newsfeed = () => {
                     ? (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data
                     : [];
                 const batchCreatedNews = (await NewsAPI.getNews(BATCH_CREATED_NEWS)).data;
+                console.log(groupCreatedNews);
+                console.log(batchCreatedNews);
                 setNews([...groupCreatedNews, ...batchCreatedNews]);
             } catch {}
         };
@@ -49,9 +51,9 @@ const Newsfeed = () => {
                                 key={index}
                             />
                         ))}
-                        {!news.length && (
+                        {news.length == 0 && (
                             <LoadingComponent
-                                text={'Nothing to check. You are free to go!'}
+                                text={'You are up to date.'}
                             />
                         )}
                     </div>
