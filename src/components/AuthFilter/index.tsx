@@ -88,6 +88,32 @@ const AuthFilter = (props: AuthFilterProps) => {
         }
     };
 
+    const handleError = (err: any) => {
+        let message = '';
+        let fallbackUrl = props.fallbackUrl;
+        if (err instanceof AuthError) {
+            const authCode = err.code;
+            if (authCode === AuthCode.UNAUTHORIZED) {
+                message = 'You must log in first!';
+                fallbackUrl = homeUrl;
+            }
+            else {
+                message = 'You have no permission to access this area!';
+            }
+        }
+        pushNotification({
+            title: 'Unauthorized',
+            message: message,
+            type: ERROR
+        });
+        if (fallbackUrl) {
+            navigate(fallbackUrl);
+        }
+        else {
+            navigate(-1);
+        }
+    };
+
     const authorize = async () => {
         try {
             const account = await getAccount();
@@ -106,29 +132,7 @@ const AuthFilter = (props: AuthFilterProps) => {
         } catch (err) {
             props.setLoaded(false);
             if (isHome) return; // No need to redirect when being on home page
-            let message = '';
-            let fallbackUrl = props.fallbackUrl;
-            if (err instanceof AuthError) {
-                const authCode = err.code;
-                if (authCode === AuthCode.UNAUTHORIZED) {
-                    message = 'You must log in first!';
-                    fallbackUrl = homeUrl;
-                }
-                else {
-                    message = 'You have no permission to access this area!';
-                }
-            }
-            pushNotification({
-                title: 'Unauthorized',
-                message: message,
-                type: ERROR
-            });
-            if (fallbackUrl) {
-                navigate(fallbackUrl);
-            }
-            else {
-                navigate(-1);
-            }
+            handleError(err);
         }
     };
 
