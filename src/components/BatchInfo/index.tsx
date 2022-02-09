@@ -26,7 +26,6 @@ const BatchInfo = (props: BatchInfoProps) => {
             }
             if (props.onSuccess) props.onSuccess();
         } catch (err) {
-            console.log(err);
             if (props.onFailure) props.onFailure(err);
         }
     };

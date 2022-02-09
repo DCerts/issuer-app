@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CertificateAPI from '../../apis/Certificate';
 import AuthFilter from '../../components/AuthFilter';
 import Certificate from '../../common/models/Certificate';
@@ -11,9 +11,13 @@ import DropDownMenu from '../../components/DropDownMenu';
 import BatchAPI from '../../apis/Batch';
 import styles from './index.module.scss';
 import LoadingComponent from '../../components/LoadingComponent';
+import { NotificationContext } from '../../App';
+import { ERROR, SUCCESS, WARNING } from '../../common/constants/NotificationConstants';
+import { dashboardRoute } from '../../Routes';
 
 
 const CreateCertificate = () => {
+    const pushNotification = useContext(NotificationContext);
     const navigate = useNavigate();
     const { groupId } = useParams();
     const [group, setGroup] = useState<number>();
@@ -51,8 +55,8 @@ const CreateCertificate = () => {
 
     const createCertificate = async () => {
         try {
-            setWaiting(true);
-            if (regNo) {
+            if (regNo && batchRegNo) {
+                setWaiting(true);
                 const certificate: Certificate = {
                     batchRegNo: batchRegNo,
                     regNo: regNo,
@@ -67,9 +71,26 @@ const CreateCertificate = () => {
                     createdIn: createdIn
                 };
                 await CertificateAPI.createCertificate(certificate);
+                pushNotification({
+                    title: 'Successful',
+                    message: `Certificate #${certificate.regNo} has been created.`,
+                    type: SUCCESS
+                });
                 navigate(-1);
             }
+            else {
+                pushNotification({
+                    title: 'Unsuccessful',
+                    message: 'Batch Reg No. and Reg No. cannot be blank!',
+                    type: WARNING
+                });
+            }
         } catch {
+            pushNotification({
+                title: 'Unsuccessful',
+                message: 'Something went wrong!',
+                type: ERROR
+            });
             setWaiting(false);
         }
     };
@@ -77,7 +98,11 @@ const CreateCertificate = () => {
     return (
         <>
             <GoBackIcon text={'Back'} />
-            <AuthFilter setLoaded={setLoaded} />
+            <AuthFilter
+                setLoaded={setLoaded}
+                group={Number.parseInt(`${groupId}`)}
+                fallbackUrl={dashboardRoute.path}
+            />
             {loaded && (availableBatches.length > 0) && (
                 <>
                     <div className={styles.container}>
@@ -136,7 +161,7 @@ const CreateCertificate = () => {
             )}
             {loaded && (availableBatches.length === 0) && (
                 <LoadingComponent
-                    text={'No batches available. Please create a batch first.'}
+                    text={'No un-issued batches available.'}
                 />
             )}
         </>

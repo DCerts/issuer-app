@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import BatchAPI from '../../apis/Batch';
 import AuthFilter from '../../components/AuthFilter';
 import Batch from '../../common/models/Batch';
@@ -12,9 +12,13 @@ import CSV from '../../utils/parsers/CSV';
 import Certificate from '../../common/models/Certificate';
 import CertificateInfo from '../../components/CertificateInfo';
 import NewsIcon from '../../components/NewsIcon';
+import { NotificationContext } from '../../App';
+import { ERROR, SUCCESS, WARNING } from '../../common/constants/NotificationConstants';
+import { dashboardRoute } from '../../Routes';
 
 
 const CreateBatch = () => {
+    const pushNotification = useContext(NotificationContext);
     const navigate = useNavigate();
     const { groupId } = useParams();
     const [loaded, setLoaded] = useState(false);
@@ -26,8 +30,8 @@ const CreateBatch = () => {
 
     const createBatch = async () => {
         try {
-            setWaiting(true);
             if (regNo) {
+                setWaiting(true);
                 const group = Number.parseInt(`${groupId}`);
                 certificates.forEach(certificate => {
                     certificate.group = group;
@@ -39,9 +43,26 @@ const CreateBatch = () => {
                     certificates: certificates
                 };
                 await BatchAPI.createBatch(batch);
+                pushNotification({
+                    title: 'Successful',
+                    message: `Batch #${batch.regNo} has been created.`,
+                    type: SUCCESS
+                });
                 navigate(-1);
             }
+            else {
+                pushNotification({
+                    title: 'Unsuccessful',
+                    message: 'Reg No. cannot be blank!',
+                    type: WARNING
+                });
+            }
         } catch {
+            pushNotification({
+                title: 'Unsuccessful',
+                message: 'Something went wrong!',
+                type: ERROR
+            });
             setWaiting(false);
         }
     };
@@ -71,7 +92,11 @@ const CreateBatch = () => {
     return (
         <>
             <GoBackIcon text={'Back'} />
-            <AuthFilter setLoaded={setLoaded} />
+            <AuthFilter
+                setLoaded={setLoaded}
+                group={Number.parseInt(`${groupId}`)}
+                fallbackUrl={dashboardRoute.path}
+            />
             {
                 loaded && (
                     <>

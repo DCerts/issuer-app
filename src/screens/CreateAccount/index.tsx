@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AccountAPI from '../../apis/Account';
 import AuthFilter from '../../components/AuthFilter';
 import Account from '../../common/models/Account';
@@ -10,9 +10,12 @@ import { dashboardRoute } from '../../Routes';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
+import { NotificationContext } from '../../App';
+import { ERROR, SUCCESS, WARNING } from '../../common/constants/NotificationConstants';
 
 
 const CreateAccount = () => {
+    const pushNotification = useContext(NotificationContext);
     const navigate = useNavigate();
     const [loaded, setLoaded] = useState(false);
     const [accountId, setAccountId] = useState<string>('');
@@ -23,8 +26,8 @@ const CreateAccount = () => {
 
     const createAccount = async () => {
         try {
-            setWaiting(true);
             if (accountId) {
+                setWaiting(true);
                 const account: Account = {
                     id: accountId,
                     name: accountName,
@@ -32,9 +35,25 @@ const CreateAccount = () => {
                     email: email
                 };
                 await AccountAPI.create(account);
+                pushNotification({
+                    title: 'Successful',
+                    message: 'Member has been added.',
+                    type: SUCCESS
+                });
                 navigate(-1);
+            } else {
+                pushNotification({
+                    title: 'Unsuccessful',
+                    message: 'Id cannot be blank!',
+                    type: WARNING
+                });
             }
         } catch {
+            pushNotification({
+                title: 'Unsuccessful',
+                message: 'Something went wrong!',
+                type: ERROR
+            });
             setWaiting(false);
         }
     };

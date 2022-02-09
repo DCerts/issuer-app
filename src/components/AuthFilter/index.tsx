@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AccountAPI from '../../apis/Account';
@@ -10,6 +10,8 @@ import Core, { Web3NotEnableError } from '../../web3/Core';
 import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
 import { REDIRECT_TO_QUERY } from '../../common/constants/RouteConstants';
+import { NotificationContext } from '../../App';
+import { ERROR } from '../../common/constants/NotificationConstants';
 
 
 interface AuthFilterProps {
@@ -22,7 +24,27 @@ interface AuthFilterProps {
     group?: number;
 }
 
+enum AuthCode {
+    UNAUTHORIZED = 0,
+    ROLE_NOT_MATCHED = 1,
+    NOT_IN_GROUP = 2
+};
+
+class AuthError extends Error {
+    private authCode: number = 0;
+
+    constructor(authCode: number) {
+        super();
+        this.authCode = authCode;
+    }
+
+    get code() {
+        return this.authCode;
+    }
+}
+
 const AuthFilter = (props: AuthFilterProps) => {
+    const pushNotification = useContext(NotificationContext);
     const [authorizing, setAuthorizing] = useState(true);
     const [isWeb3Enable, setIsWeb3Enable] = useState(true);
     const navigate = useNavigate();
@@ -46,17 +68,34 @@ const AuthFilter = (props: AuthFilterProps) => {
         }
     };
 
+    const getAccount = async () => {
+        try {
+            return (await AccountAPI.get()).data;
+        } catch {
+            throw new AuthError(AuthCode.UNAUTHORIZED);
+        }
+    };
+
+    const getGroup = async (groupId: number, accountId: string) => {
+        try {
+            const group = (await GroupAPI.getGroup(groupId)).data;
+            if (!group.members.includes(accountId)) {
+                throw new AuthError(AuthCode.NOT_IN_GROUP);
+            }
+            return group;
+        } catch {
+            throw new AuthError(AuthCode.NOT_IN_GROUP);
+        }
+    };
+
     const authorize = async () => {
         try {
-            const account = (await AccountAPI.get()).data;
+            const account = await getAccount();
             if (props.role !== undefined && account.role !== props.role) {
-                throw new Error();
+                throw new AuthError(AuthCode.ROLE_NOT_MATCHED);
             }
             if (props.group !== undefined) {
-                const group = (await GroupAPI.getGroup(props.group)).data;
-                if (!group.members.includes(account.id)) {
-                    throw new Error();
-                }
+                const group = await getGroup(props.group, account.id);
                 if (props.setGroup) props.setGroup(group);
             }
             if (props.setAccount) props.setAccount(account);
@@ -67,11 +106,28 @@ const AuthFilter = (props: AuthFilterProps) => {
         } catch (err) {
             props.setLoaded(false);
             if (isHome) return; // No need to redirect when being on home page
-            if (axios.isAxiosError(err)) { // Unauthorized
-                navigate(homeUrl);
+            let message = '';
+            let fallbackUrl = props.fallbackUrl;
+            if (err instanceof AuthError) {
+                const authCode = err.code;
+                if (authCode === AuthCode.UNAUTHORIZED) {
+                    message = 'You must log in first!';
+                    fallbackUrl = homeUrl;
+                }
+                else {
+                    message = 'You have no permission to access this area!';
+                }
             }
-            else { // Role mismatch
-                navigate(props.fallbackUrl || homeUrl);
+            pushNotification({
+                title: 'Unauthorized',
+                message: message,
+                type: ERROR
+            });
+            if (fallbackUrl) {
+                navigate(fallbackUrl);
+            }
+            else {
+                navigate(-1);
             }
         }
     };

@@ -16,10 +16,9 @@ const LoadingComponent = (props: LoadingComponentProps) => {
     return (
         <div className={styles.container}>
             <div className={styles.text}>
-                {props.text || defaultText}
                 {props.cancelText && (
                     <div className={styles.clickable}>
-                        {' '}
+                        {props.text || defaultText}{' '}
                         <TextShortCut
                             text={props.cancelText || defaultCancelText}
                             onClick={props.onCancel}

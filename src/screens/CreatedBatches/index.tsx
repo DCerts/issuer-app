@@ -7,6 +7,7 @@ import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import NewsIcon from '../../components/NewsIcon';
+import { dashboardRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
@@ -35,6 +36,7 @@ const CreatedBatches = () => {
                 setLoaded={setLoaded}
                 setGroup={setGroup}
                 group={Number.parseInt(`${groupId}`)}
+                fallbackUrl={dashboardRoute.path}
             />
             {
                 loaded && (

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BatchAPI from '../../apis/Batch';
+import { NotificationContext } from '../../App';
+import { ERROR, SUCCESS } from '../../common/constants/NotificationConstants';
 import Account, { EMPTY } from '../../common/models/Account';
 import Batch from '../../common/models/Batch';
 import Certificate from '../../common/models/Certificate';
@@ -15,6 +17,7 @@ import styles from './index.module.scss';
 
 
 const BatchDashboard = () => {
+    const pushNotification = useContext(NotificationContext);
     const { regNo } = useParams();
     const [batch, setBatch] = useState<Batch>();
     const [seekingCertificate, setSeekingCertificate] = useState<Certificate>();
@@ -49,8 +52,22 @@ const BatchDashboard = () => {
                     <BatchInfo
                         batch={batch}
                         groups={account.groups || []}
-                        onSuccess={() => navigate(-1)}
-                        onFailure={() => setWaiting(false)}
+                        onSuccess={() => {
+                            pushNotification({
+                                title: 'Successful',
+                                message: 'Your confirmation is submited!',
+                                type: SUCCESS
+                            });
+                            navigate(-1);
+                        }}
+                        onFailure={() => {
+                            pushNotification({
+                                title: 'Unsuccessful',
+                                message: 'Something went wrong!',
+                                type: ERROR
+                            });
+                            setWaiting(false);
+                        }}
                         onSubmit={() => setWaiting(true)}
                     />
                     {batch.certificates.length > 0 && (
@@ -58,6 +75,7 @@ const BatchDashboard = () => {
                             <NewsIcon
                                 title={certificate.regNo}
                                 hoverTitle={'View details!'}
+                                highlight={certificate.issued}
                                 key={index}
                                 onClick={() => setSeekingCertificate(certificate)}
                             />

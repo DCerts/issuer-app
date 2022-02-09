@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { NotificationContext } from '../../App';
+import { SUCCESS } from '../../common/constants/NotificationConstants';
 import AuthFilter from '../../components/AuthFilter';
 import DropDownMenu from '../../components/DropDownMenu';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
+import Notification from '../../components/Notification';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
 import Wallet from '../../web3/Wallet';
@@ -28,6 +31,16 @@ const Test = () => {
 
         if (loaded) test();
     }, [loaded]);
+
+    const pushNotification = useContext(NotificationContext);
+
+    const click = () => {
+        pushNotification({
+            title: 'Test',
+            message: 'Hello World!',
+            type: SUCCESS,
+        });
+    };
 
     return (
         <>
@@ -61,7 +74,7 @@ const Test = () => {
                         />
                         <SubmitButton
                             title={'Submit!'}
-                            onClick={console.log}
+                            onClick={click}
                         />
                     </div>
                 )

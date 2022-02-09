@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthFilter from '../../components/AuthFilter';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
@@ -9,9 +9,12 @@ import { dashboardRoute } from '../../Routes';
 import { useNavigate } from 'react-router-dom';
 import LoadingComponent from '../../components/LoadingComponent';
 import styles from './index.module.scss';
+import { NotificationContext } from '../../App';
+import { ERROR, SUCCESS } from '../../common/constants/NotificationConstants';
 
 
 const CreateGroup = () => {
+    const pushNotification = useContext(NotificationContext);
     const navigate = useNavigate();
     const [loaded, setLoaded] = useState(false);
     const [groupName, setGroupName] = useState<string>('');
@@ -27,8 +30,18 @@ const CreateGroup = () => {
                 groupMembers,
                 groupThreshold
             );
+            pushNotification({
+                title: 'Successful',
+                message: `Group ${groupName} has been created.`,
+                type: SUCCESS
+            });
             navigate(-1);
         } catch {
+            pushNotification({
+                title: 'Unsuccessful',
+                message: 'Something went wrong!',
+                type: ERROR
+            });
             setWaiting(false);
         }
     };

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import GroupAPI from '../../apis/Group';
+import { NotificationContext } from '../../App';
+import { ERROR, SUCCESS } from '../../common/constants/NotificationConstants';
 import Account, { EMPTY } from '../../common/models/Account';
 import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
@@ -8,12 +10,12 @@ import GoBackButton from '../../components/GoBackIcon';
 import GroupInfo from '../../components/GroupInfo';
 import LoadingComponent from '../../components/LoadingComponent';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
-import WaitingForTransaction from '../../components/WaitingForTransaction';
 import PetsAnimalPack from '../../icons/PetsAnimalPack';
 import styles from './index.module.scss';
 
 
 const GroupDashboard = () => {
+    const pushNotification = useContext(NotificationContext);
     const { groupId } = useParams();
     const [account, setAccount] = useState<Account>(EMPTY);
     const [group, setGroup] = useState<Group>();
@@ -44,8 +46,22 @@ const GroupDashboard = () => {
                     <GroupInfo
                         role={account.role}
                         group={group}
-                        onSuccess={() => navigate(-1)}
-                        onFailure={() => setWaiting(false)}
+                        onSuccess={() => {
+                            pushNotification({
+                                title: 'Successful',
+                                message: 'Your confirmation is submited.',
+                                type: SUCCESS
+                            });
+                            navigate(-1);
+                        }}
+                        onFailure={() => {
+                            pushNotification({
+                                title: 'Unsuccessful',
+                                message: 'Something went wrong!',
+                                type: ERROR
+                            });
+                            setWaiting(false);
+                        }}
                         onSubmit={() => setWaiting(true)}
                     />
                     <div className={styles.pane}>

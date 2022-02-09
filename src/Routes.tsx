@@ -15,6 +15,7 @@ import GroupDashboard from './screens/GroupDashboard';
 import Home from './screens/Home';
 import JoinedGroups from './screens/JoinedGroups';
 import Newsfeed from './screens/Newsfeed';
+import NotFound from './screens/NotFound';
 import Test from './screens/Test';
 
 
@@ -98,6 +99,11 @@ export const testRoute = {
     element: <Test />
 };
 
+export const notFoundRoute = {
+    path: '*',
+    element: <NotFound />
+};
+
 const Routes = () => {
     const routes = useRoutes([
         testRoute,
@@ -115,7 +121,8 @@ const Routes = () => {
         groupDashboardRoute,
         accountDashboardRoute,
         certificateDashboardRoute,
-        batchDashboardRoute
+        batchDashboardRoute,
+        notFoundRoute // let it be the last route
     ]);
 
     return (
