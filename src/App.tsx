@@ -5,7 +5,12 @@ import './App.scss';
 
 const App = () => {
     return (
-        <Routes />
+        <>
+            <div className={'background'}></div>
+            <div className={'container'}>
+                <Routes />
+            </div>
+        </>
     );
 };
 

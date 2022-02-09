@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import NewsAPI from '../../apis/News';
 import { DatumType, NewsDatum } from '../../common/models/News';
-import Role from '../../common/models/Role';
 import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/constants/NewsConstants';
 import AuthFilter from '../../components/AuthFilter';
 import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import NewsIcon from '../../components/NewsIcon';
 import { dashboardRoute } from '../../Routes';
+import { Account, Role } from '../../common/models';
+import { EMPTY } from '../../common/models/Account';
 import styles from './index.module.scss';
 
 
 const Newsfeed = () => {
+    const [account, setAccount] = useState<Account>(EMPTY);
     const [loaded, setLoaded] = useState(false);
     const [news, setNews] = useState<NewsDatum<DatumType>[] | undefined>();
 
     useEffect(() => {
         const getNews = async () => {
             try {
-                const groupCreatedNews = (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data;
+                const groupCreatedNews = account.role === Role.SCHOOL
+                    ? (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data
+                    : [];
                 const batchCreatedNews = (await NewsAPI.getNews(BATCH_CREATED_NEWS)).data;
                 setNews([...groupCreatedNews, ...batchCreatedNews]);
             } catch {}
@@ -32,7 +36,7 @@ const Newsfeed = () => {
             <GoBackButton text={'Back'} />
             <AuthFilter
                 setLoaded={setLoaded}
-                role={Role.SCHOOL}
+                setAccount={setAccount}
                 fallbackUrl={dashboardRoute.path}
             />
             {

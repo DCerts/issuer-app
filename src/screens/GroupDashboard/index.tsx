@@ -61,9 +61,6 @@ const GroupDashboard = () => {
                                     to={`/groups/${groupId}/certificates`}
                                     icon={PetsAnimalPack.getIcon('Monkey')}
                                 />
-                                <MainFeatureIcon
-                                    title={'Unknown'}
-                                />
                             </>
                         )}
                     </div>

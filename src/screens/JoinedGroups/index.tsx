@@ -38,6 +38,7 @@ const JoinedGroups = () => {
                             <NewsIcon
                                 title={'You need a new group, don\'t you?'}
                                 hoverTitle={'Create one now!'}
+                                special={true}
                                 url={createGroupRoute.path}
                             />
                         )}

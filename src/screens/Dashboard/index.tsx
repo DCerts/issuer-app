@@ -19,15 +19,17 @@ const Dashboard = () => {
     useEffect(() => {
         const getNews = async () => {
             try {
-                const groupCreatedNews = (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data;
+                const groupCreatedNews = account.role === Role.SCHOOL
+                    ? (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data
+                    : [];
                 const batchCreatedNews = (await NewsAPI.getNews(BATCH_CREATED_NEWS)).data;
                 const news = [...groupCreatedNews, ...batchCreatedNews];
                 if (news && news.length) setNewsCount(news.length);
             } catch {}
         };
 
-        if (loaded && account.role === Role.SCHOOL) getNews();
-    }, [loaded, account.role]);
+        if (loaded) getNews();
+    }, [loaded]);
 
     return (
         <>
@@ -39,13 +41,6 @@ const Dashboard = () => {
                         {account.role === Role.SCHOOL && (
                             <>
                                 <MainFeatureIcon
-                                    title={'Newsfeed'}
-                                    icon={PetsAnimalPack.getIcon('Chicken')}
-                                    descriptions={[]}
-                                    to={newsfeedRoute.path}
-                                    notificationCount={newsCount}
-                                />
-                                <MainFeatureIcon
                                     title={'Members'}
                                     icon={PetsAnimalPack.getIcon('Zebra')}
                                     to={allAccountsRoute.path}
@@ -53,24 +48,16 @@ const Dashboard = () => {
                             </>
                         )}
                         <MainFeatureIcon
+                            title={'Newsfeed'}
+                            icon={PetsAnimalPack.getIcon('Chicken')}
+                            descriptions={[]}
+                            to={newsfeedRoute.path}
+                            notificationCount={newsCount}
+                        />
+                        <MainFeatureIcon
                             title={'Groups'}
                             icon={PetsAnimalPack.getIcon('Leopard')}
                             to={joinedGroupsRoute.path}
-                        />
-                        <MainFeatureIcon
-                            title={'Unknown'}
-                        />
-                        <MainFeatureIcon
-                            title={'Unknown'}
-                        />
-                        <MainFeatureIcon
-                            title={'Unknown'}
-                        />
-                        <MainFeatureIcon
-                            title={'Unknown'}
-                        />
-                        <MainFeatureIcon
-                            title={'Unknown'}
                         />
                     </div>
                 )

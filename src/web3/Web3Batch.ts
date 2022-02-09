@@ -34,7 +34,7 @@ class Web3Batch {
             });
             await contract.methods
                 .submitBatch(batch.group, batch.regNo, certificates)
-                .send(Wallet.getSendingOptions());
+                .send(await Wallet.getSendingOptions());
         }
     }
 
@@ -43,7 +43,7 @@ class Web3Batch {
         if (contract) {
             await contract.methods
                 .confirmBatch(groupId, onChainId)
-                .send(Wallet.getSendingOptions());
+                .send(await Wallet.getSendingOptions());
         }
     }
 
@@ -52,7 +52,7 @@ class Web3Batch {
         if (contract) {
             await contract.methods
                 .rejectBatch(groupId, onChainId)
-                .send(Wallet.getSendingOptions());
+                .send(await Wallet.getSendingOptions());
         }
     }
 }

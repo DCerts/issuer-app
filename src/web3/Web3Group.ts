@@ -14,7 +14,7 @@ class Web3Group {
         if (contract) {
             await contract.methods
                 .addGroup(name, members, threshold)
-                .send(Wallet.getSendingOptions());
+                .send(await Wallet.getSendingOptions());
         }
     }
 
@@ -23,7 +23,7 @@ class Web3Group {
         if (contract) {
             await contract.methods
                 .confirmGroup(groupId)
-                .send(Wallet.getSendingOptions());
+                .send(await Wallet.getSendingOptions());
         }
     }
 
@@ -32,7 +32,7 @@ class Web3Group {
         if (contract) {
             await contract.methods
                 .rejectGroup(groupId)
-                .send(Wallet.getSendingOptions());
+                .send(await Wallet.getSendingOptions());
         }
     }
 }
