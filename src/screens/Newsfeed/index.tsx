@@ -3,13 +3,14 @@ import NewsAPI from '../../apis/News';
 import { DatumType, NewsDatum } from '../../common/models/News';
 import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/constants/NewsConstants';
 import AuthFilter from '../../components/AuthFilter';
-import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
 import NewsIcon from '../../components/NewsIcon';
-import { dashboardRoute } from '../../Routes';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import { Account, Role } from '../../common/models';
 import { EMPTY } from '../../common/models/Account';
 import styles from './index.module.scss';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
 
 
 const Newsfeed = () => {
@@ -35,7 +36,10 @@ const Newsfeed = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter
                 setLoaded={setLoaded}
                 setAccount={setAccount}

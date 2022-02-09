@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import CertificateAPI from '../../apis/Certificate';
 import Certificate from '../../common/models/Certificate';
 import AuthFilter from '../../components/AuthFilter';
-import GoBackButton from '../../components/GoBackIcon';
 import CertificateInfo from '../../components/CertificateInfo';
 import LoadingComponent from '../../components/LoadingComponent';
 import styles from './index.module.scss';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 
 
 const CertificateDashboard = () => {
@@ -30,7 +32,10 @@ const CertificateDashboard = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter setLoaded={setLoaded} />
             {loaded && certificate && (
                 <div className={styles.container}>

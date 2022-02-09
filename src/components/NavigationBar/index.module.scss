@@ -3,17 +3,20 @@ $fontSize: 120%;
 $fontColor: #000;
 
 
-.button {
+.container {
     position: fixed;
     top: 0;
-    right: 20px;
+    left: 0;
+    z-index: 3;
+}
+
+.button {
     padding: $padding;
     font-size: $fontSize;
     color: $fontColor;
     background-color: unset;
     border: none;
     cursor: pointer;
-    z-index: 2;
 }
 
 .button:hover {

@@ -2,7 +2,7 @@ import React from 'react';
 import AuthAPI from '../../apis/Auth';
 import { JWT_KEY } from '../../common/constants/AuthConstants';
 import { homeRoute } from '../../Routes';
-import GoBackButton from '../GoBackIcon';
+import GoBackIcon from '../GoBackIcon';
 
 
 const LogoutButton = () => {
@@ -14,7 +14,7 @@ const LogoutButton = () => {
     };
 
     return (
-        <GoBackButton
+        <GoBackIcon
             to={homeRoute.path}
             onClick={logout}
             text={'Log out'}

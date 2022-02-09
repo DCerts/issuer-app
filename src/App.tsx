@@ -2,6 +2,7 @@ import React from 'react';
 import Routes from './Routes';
 import Notification from './components/Notification';
 import './App.scss';
+import ReactDOM from 'react-dom';
 
 
 export const NotificationContext = React.createContext((notification: Notif) => {
@@ -13,19 +14,35 @@ interface Notif {
     message: string;
     type: string;
     action?: () => void;
+    popupTime?: number;
 }
 
 const App = () => {
-    const notifs: Notif[] = [];
-    const [notifications, setNotifications] = React.useState<Notif[]>([]);
+    const popupContainer = React.useRef<HTMLDivElement>(null);
+    const popupTime = 4000;
 
     const pushNotification = (notif: Notif) => {
-        notifs.push(notif);
-        setNotifications([...notifs]);
-        setTimeout(() => {
-            notifs.splice(notifs.indexOf(notif), 1);
-            setNotifications([...notifs]);
-        }, 3000);
+        const notifElement = (
+            <Notification
+                title={notif.title}
+                message={notif.message}
+                type={notif.type}
+                action={notif.action}
+            />
+        );
+
+        const notifDiv = document.createElement('div');
+        ReactDOM.render(notifElement, notifDiv);
+
+        if (popupContainer.current) {
+            popupContainer.current.appendChild(notifDiv);
+
+            setTimeout(() => {
+                if (popupContainer.current) {
+                    popupContainer.current.removeChild(notifDiv);
+                }
+            }, notif.popupTime || popupTime);
+        }
     };
 
     return (
@@ -33,15 +50,7 @@ const App = () => {
             <div className={'background'}></div>
             <div className={'container'}>
                 <Routes />
-                {notifications.map((notification, index) => (
-                    <Notification
-                        title={notification.title}
-                        message={notification.message}
-                        type={notification.type}
-                        action={notification.action}
-                        key={index}
-                    />
-                ))}
+                <div ref={popupContainer}></div>
             </div>
         </NotificationContext.Provider>
     );

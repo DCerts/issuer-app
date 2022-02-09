@@ -9,10 +9,12 @@ import Certificate from '../../common/models/Certificate';
 import AuthFilter from '../../components/AuthFilter';
 import BatchInfo from '../../components/BatchInfo';
 import CertificateInfo from '../../components/CertificateInfo';
-import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
 import NewsIcon from '../../components/NewsIcon';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
@@ -42,7 +44,10 @@ const BatchDashboard = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter
                 setLoaded={setLoaded}
                 setAccount={setAccount}

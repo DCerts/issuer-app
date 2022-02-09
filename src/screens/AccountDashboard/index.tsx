@@ -3,11 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import AccountAPI from '../../apis/Account';
 import Account from '../../common/models/Account';
 import AuthFilter from '../../components/AuthFilter';
-import GoBackButton from '../../components/GoBackIcon';
 import AccountInfo from '../../components/AccountInfo';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import styles from './index.module.scss';
 import LoadingComponent from '../../components/LoadingComponent';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
+import { allAccountsRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 
 
 const AccountDashboard = () => {
@@ -32,7 +34,10 @@ const AccountDashboard = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute, allAccountsRoute]}
+            />
             <AuthFilter setLoaded={setLoaded} />
             {loaded && account && (
                 <div className={styles.container}>

@@ -5,13 +5,14 @@ import Account from '../../common/models/Account';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
 import { Role } from '../../common/models';
-import GoBackIcon from '../../components/GoBackIcon';
-import { dashboardRoute } from '../../Routes';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 import { NotificationContext } from '../../App';
 import { ERROR, SUCCESS, WARNING } from '../../common/constants/NotificationConstants';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
 
 
 const CreateAccount = () => {
@@ -60,7 +61,10 @@ const CreateAccount = () => {
 
     return (
         <>
-            <GoBackIcon text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter
                 setLoaded={setLoaded}
                 role={Role.SCHOOL}

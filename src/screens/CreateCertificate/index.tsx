@@ -4,7 +4,6 @@ import AuthFilter from '../../components/AuthFilter';
 import Certificate from '../../common/models/Certificate';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
-import GoBackIcon from '../../components/GoBackIcon';
 import WaitingForTransaction from '../../components/WaitingForTransaction';
 import { useNavigate, useParams } from 'react-router-dom';
 import DropDownMenu from '../../components/DropDownMenu';
@@ -13,7 +12,9 @@ import styles from './index.module.scss';
 import LoadingComponent from '../../components/LoadingComponent';
 import { NotificationContext } from '../../App';
 import { ERROR, SUCCESS, WARNING } from '../../common/constants/NotificationConstants';
-import { dashboardRoute } from '../../Routes';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
 
 
 const CreateCertificate = () => {
@@ -97,7 +98,10 @@ const CreateCertificate = () => {
 
     return (
         <>
-            <GoBackIcon text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter
                 setLoaded={setLoaded}
                 group={Number.parseInt(`${groupId}`)}

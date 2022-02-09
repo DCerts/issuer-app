@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import AccountAPI from '../../apis/Account';
 import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
-import GoBackButton from '../../components/GoBackIcon';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
 import NewsIcon from '../../components/NewsIcon';
-import { createAccountRoute, dashboardRoute } from '../../Routes';
+import { allAccountsRoute, createAccountRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
@@ -25,7 +26,10 @@ const AllAccounts = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute, allAccountsRoute]}
+            />
             <AuthFilter
                 setLoaded={setLoaded}
                 setAccount={setAccount}

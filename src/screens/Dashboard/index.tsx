@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
 import { Account, Role } from '../../common/models';
 import AuthFilter from '../../components/AuthFilter';
-import { allAccountsRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
+import { allAccountsRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import LogoutButton from '../../components/LogoutButton';
 import NewsAPI from '../../apis/News';
 import { EMPTY } from '../../common/models/Account';
 import styles from './index.module.scss';
 import { BATCH_CREATED_NEWS, GROUP_CREATED_NEWS } from '../../common/constants/NewsConstants';
 import PetsAnimalPack from '../../icons/PetsAnimalPack';
+import NavigationBar from '../../components/NavigationBar';
 
 
 const Dashboard = () => {
@@ -34,6 +35,9 @@ const Dashboard = () => {
     return (
         <>
             <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
             {
                 loaded && (

@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { NotificationContext } from '../../App';
 import { SUCCESS } from '../../common/constants/NotificationConstants';
 import AuthFilter from '../../components/AuthFilter';
-import DropDownMenu from '../../components/DropDownMenu';
-import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
-import Notification from '../../components/Notification';
+import LogoutButton from '../../components/LogoutButton';
+import NavigationBar from '../../components/NavigationBar';
+import SelectionPane from '../../components/SelectionPane';
 import SimpleInput from '../../components/SimpleInput';
 import SubmitButton from '../../components/SubmitButton';
+import { dashboardRoute, homeRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import Wallet from '../../web3/Wallet';
 import styles from './index.module.scss';
 
@@ -44,7 +45,10 @@ const Test = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter setLoaded={setLoaded} />
             {
                 loaded && (
@@ -52,7 +56,7 @@ const Test = () => {
                         <LoadingComponent
                             text={'OK!'}
                         />
-                        <DropDownMenu
+                        <SelectionPane
                             text={'Select an option'}
                             options={[
                                 'Lorem ipsum dolor sit amet',

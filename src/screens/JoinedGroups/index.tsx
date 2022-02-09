@@ -3,12 +3,13 @@ import GroupAPI from '../../apis/Group';
 import { Account, Role } from '../../common/models';
 import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
-import GoBackButton from '../../components/GoBackIcon';
 import LoadingComponent from '../../components/LoadingComponent';
+import LogoutButton from '../../components/LogoutButton';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
+import NavigationBar from '../../components/NavigationBar';
 import NewsIcon from '../../components/NewsIcon';
 import PetsAnimalPack from '../../icons/PetsAnimalPack';
-import { createGroupRoute } from '../../Routes';
+import { createGroupRoute, dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
@@ -29,7 +30,10 @@ const JoinedGroups = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
             {
                 loaded && groups && (

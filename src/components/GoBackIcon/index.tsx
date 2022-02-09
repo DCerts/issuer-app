@@ -9,7 +9,7 @@ interface GoBackIconProps {
     onClick?: () => void,
 }
 
-const GoBackButton = (props: GoBackIconProps) => {
+const GoBackIcon = (props: GoBackIconProps) => {
     const navigate = useNavigate();
 
     return (
@@ -25,4 +25,4 @@ const GoBackButton = (props: GoBackIconProps) => {
     );
 };
 
-export default GoBackButton;
+export default GoBackIcon;

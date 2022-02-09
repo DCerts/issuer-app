@@ -51,6 +51,7 @@ const DropDownMenu = (props: DropDownMenuProps) => {
                     }}
                     onChange={(e) => {
                         setTimeout(() => {
+                            setSelectedOption(e.target.value);
                             search(e.target.value);
                         }, typingDelay);
                     }}

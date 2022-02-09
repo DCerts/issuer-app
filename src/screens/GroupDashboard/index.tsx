@@ -6,11 +6,13 @@ import { ERROR, SUCCESS } from '../../common/constants/NotificationConstants';
 import Account, { EMPTY } from '../../common/models/Account';
 import Group from '../../common/models/Group';
 import AuthFilter from '../../components/AuthFilter';
-import GoBackButton from '../../components/GoBackIcon';
 import GroupInfo from '../../components/GroupInfo';
 import LoadingComponent from '../../components/LoadingComponent';
+import LogoutButton from '../../components/LogoutButton';
 import MainFeatureIcon from '../../components/MainFeatureIcon';
+import NavigationBar from '../../components/NavigationBar';
 import PetsAnimalPack from '../../icons/PetsAnimalPack';
+import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import styles from './index.module.scss';
 
 
@@ -39,7 +41,10 @@ const GroupDashboard = () => {
 
     return (
         <>
-            <GoBackButton text={'Back'} />
+            <LogoutButton />
+            <NavigationBar
+                links={[dashboardRoute, joinedGroupsRoute, newsfeedRoute]}
+            />
             <AuthFilter setLoaded={setLoaded} setAccount={setAccount} />
             {loaded && !waiting && group && (
                 <div className={styles.container}>

@@ -21,7 +21,7 @@ const SimpleInput = (props: SimpleInputProps) => {
         <div className={styles.container}>
             <input
                 className={isFile ? styles.pointer : ''}
-                type={'text'}
+                type={props.type || 'text'}
                 placeholder={props.placeholder}
                 value={isFile ? props.placeholder : props.value}
                 onChange={(e) => {
