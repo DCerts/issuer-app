@@ -71,7 +71,12 @@ const SelectionPane = (props: SelectionPaneProps) => {
                                     onClick={() => {
                                         setFocused(false);
                                         if (inputElement) {
-                                            inputElement.value = selectedOptions.join(', ');
+                                            setTimeout(() => {
+                                                inputElement.value = selectedOptions.join(', ');
+                                                if (props.onOptionsChanged) {
+                                                    props.onOptionsChanged(...selectedOptions);
+                                                }
+                                            }, focusDelay);
                                         }
                                     }}
                                 />
@@ -92,9 +97,6 @@ const SelectionPane = (props: SelectionPaneProps) => {
                                             else {
                                                 currentSelectedOptions.push(option);
                                                 setSelectedOptions([...currentSelectedOptions]);
-                                            }
-                                            if (props.onOptionsChanged) {
-                                                props.onOptionsChanged(...selectedOptions);
                                             }
                                         }}
                                         key={index}
