@@ -30,9 +30,8 @@ const NavigationBar = (props: NavigationBarProps) => {
     return (
         <div className={styles.container}>
             {props.links.map((link, index) => (
-                <>
+                <span key={index}>
                     <button
-                        key={index}
                         className={getStyles()}
                         onClick={() => {
                             if (link.path) navigate(link.path);
@@ -43,7 +42,7 @@ const NavigationBar = (props: NavigationBarProps) => {
                     {(index < totalLinks - 1) && (
                         <>{'|'}</>
                     )}
-                </>
+                </span>
             ))}
         </div>
     );
