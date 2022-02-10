@@ -25,8 +25,6 @@ const Newsfeed = () => {
                     ? (await NewsAPI.getNews(GROUP_CREATED_NEWS)).data
                     : [];
                 const batchCreatedNews = (await NewsAPI.getNews(BATCH_CREATED_NEWS)).data;
-                console.log(groupCreatedNews);
-                console.log(batchCreatedNews);
                 setNews([...groupCreatedNews, ...batchCreatedNews]);
             } catch {}
         };
