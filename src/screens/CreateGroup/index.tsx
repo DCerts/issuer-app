@@ -8,7 +8,7 @@ import { dashboardRoute, joinedGroupsRoute, newsfeedRoute } from '../../Routes';
 import { useNavigate } from 'react-router-dom';
 import LoadingComponent from '../../components/LoadingComponent';
 import { NotificationContext } from '../../App';
-import { ERROR, SUCCESS } from '../../common/constants/NotificationConstants';
+import { ERROR, SUCCESS, WARNING } from '../../common/constants/NotificationConstants';
 import LogoutButton from '../../components/LogoutButton';
 import NavigationBar from '../../components/NavigationBar';
 import AccountAPI from '../../apis/Account';
@@ -57,8 +57,10 @@ const CreateGroup = () => {
 
     const handleError = (err: any) => {
         let message = '';
+        let type = ERROR;
         if (err instanceof ValidationError) {
             const errorCode = err.code;
+            type = WARNING;
             if (errorCode === ValidationCode.GROUP_NAME_INVALID) {
                 message = 'Name of a group cannot be blank!';
             }
@@ -76,7 +78,7 @@ const CreateGroup = () => {
         pushNotification({
             title: 'Unsuccessful',
             message: message,
-            type: ERROR
+            type: type
         });
     };
 
