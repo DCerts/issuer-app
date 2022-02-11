@@ -21,7 +21,7 @@ const SimpleInput = (props: SimpleInputProps) => {
         <div className={styles.container}>
             <input
                 className={isFile ? styles.pointer : ''}
-                type={props.type || 'text'}
+                type={isFile ? 'text' : props.type}
                 placeholder={props.placeholder}
                 value={isFile ? props.placeholder : props.value}
                 onChange={(e) => {
@@ -36,7 +36,7 @@ const SimpleInput = (props: SimpleInputProps) => {
                 readOnly={isFile}
                 onClick={(e) => {
                     if (isFile) {
-                        fileInput.current!.click();
+                        if (fileInput.current) fileInput.current.click();
                         (e.target as HTMLInputElement).blur();
                     }
                 }}
