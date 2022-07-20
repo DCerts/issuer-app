@@ -7,6 +7,7 @@ import WalletAPI from '../../web3/Wallet';
 import LoadingComponent from '../LoadingComponent';
 import { homeRoute } from '../../Routes';
 import Core, { Web3NotEnableError } from '../../web3/Core';
+import API from '../../apis/Base';
 import GroupAPI from '../../apis/Group';
 import Group from '../../common/models/Group';
 import { REDIRECT_TO_QUERY } from '../../common/constants/RouteConstants';
@@ -94,6 +95,7 @@ const AuthFilter = (props: AuthFilterProps) => {
         if (err instanceof AuthError) {
             const authCode = err.code;
             if (authCode === AuthCode.UNAUTHORIZED) {
+                API.clearToken();
                 message = 'You must log in first!';
                 fallbackUrl = homeUrl;
             }
@@ -126,20 +128,34 @@ const AuthFilter = (props: AuthFilterProps) => {
             }
             if (props.setAccount) props.setAccount(account);
             if (props.successUrl) navigate(props.successUrl);
-            await WalletAPI.connect();
             setAuthorizing(false);
             props.setLoaded(true);
+            return true;
         } catch (err) {
             props.setLoaded(false);
             if (isHome) return; // No need to redirect when being on home page
             handleError(err);
+            return false;
+        }
+    };
+
+    const connectWeb3 = async () => {
+        try {
+            await WalletAPI.connect();
+        } catch (err) {
+            pushNotification({
+                title: 'Network Incorrect',
+                message: 'Please check your network in MetaMask.',
+                type: ERROR
+            });
         }
     };
 
     useEffect(() => {
         const check = async () => {
             if (await enableWeb3()) {
-                authorize();
+                const authorized = await authorize();
+                if (authorized) await connectWeb3();
             }
         };
 
